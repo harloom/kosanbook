@@ -15,6 +15,8 @@ package view;
 
 
 import controller.MemberController;
+import database.Database;
+import enity.Harga;
 import enity.Member;
 import error.HargaException;
 
@@ -23,6 +25,7 @@ import java.awt.Color;
 
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
@@ -31,6 +34,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import model.MemberModel;
+import service.HargaDao;
 
 
 /**
@@ -117,6 +121,20 @@ private MemberModel memberModel;
         radiobLaki = new javax.swing.JRadioButton();
         radiobperempuan = new javax.swing.JRadioButton();
         panelInfo = new javax.swing.JPanel();
+        labelheaderkamar = new javax.swing.JLabel();
+        labelvip = new javax.swing.JLabel();
+        labelstandard = new javax.swing.JLabel();
+        labelNama4 = new javax.swing.JLabel();
+        labelNama5 = new javax.swing.JLabel();
+        labelvip1 = new javax.swing.JLabel();
+        labelstandard1 = new javax.swing.JLabel();
+        labelheaderkamar1 = new javax.swing.JLabel();
+        labelVvip = new javax.swing.JLabel();
+        labelVstd = new javax.swing.JLabel();
+        labelVkosong = new javax.swing.JLabel();
+        labelV30 = new javax.swing.JLabel();
+        labelV50 = new javax.swing.JLabel();
+        labelV20 = new javax.swing.JLabel();
         btnResetc = new javax.swing.JButton();
         labelTotal = new javax.swing.JLabel();
         outputTotal = new javax.swing.JLabel();
@@ -565,15 +583,115 @@ private MemberModel memberModel;
 
         panelInfo.setBackground(new java.awt.Color(-1,true));
 
+        labelheaderkamar.setFont(new java.awt.Font("Dialog", 1, 14));
+        labelheaderkamar.setText("Tipe Kamar");
+
+        labelvip.setFont(new java.awt.Font("Dialog", 0, 14));
+        labelvip.setText("VIP");
+
+        labelstandard.setFont(new java.awt.Font("Dialog", 0, 14));
+        labelstandard.setText("Standard");
+
+        labelNama4.setFont(new java.awt.Font("Dialog", 0, 14));
+        labelNama4.setText("Kosong");
+
+        labelNama5.setFont(new java.awt.Font("Dialog", 0, 14));
+        labelNama5.setText("20Mbps");
+
+        labelvip1.setFont(new java.awt.Font("Dialog", 0, 14));
+        labelvip1.setText("50Mbps");
+
+        labelstandard1.setFont(new java.awt.Font("Dialog", 0, 14));
+        labelstandard1.setText("30Mbps");
+
+        labelheaderkamar1.setFont(new java.awt.Font("Dialog", 1, 14));
+        labelheaderkamar1.setText("Tipe Wi-Fi");
+
+        labelVvip.setText("0");
+
+        labelVstd.setText("0");
+
+        labelVkosong.setText("0");
+
+        labelV30.setText("0");
+
+        labelV50.setText("0");
+
+        labelV20.setText("0");
+
         javax.swing.GroupLayout panelInfoLayout = new javax.swing.GroupLayout(panelInfo);
         panelInfo.setLayout(panelInfoLayout);
         panelInfoLayout.setHorizontalGroup(
             panelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 231, Short.MAX_VALUE)
+            .addGroup(panelInfoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelInfoLayout.createSequentialGroup()
+                        .addGroup(panelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelstandard, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelvip1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelstandard1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelNama5, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelvip, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelInfoLayout.createSequentialGroup()
+                                .addComponent(labelVvip, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(45, 45, 45))
+                            .addGroup(panelInfoLayout.createSequentialGroup()
+                                .addComponent(labelVstd, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+                                .addGap(59, 59, 59))
+                            .addComponent(labelV50, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(panelInfoLayout.createSequentialGroup()
+                                .addComponent(labelV30, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                                .addGap(14, 14, 14))
+                            .addGroup(panelInfoLayout.createSequentialGroup()
+                                .addComponent(labelV20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(7, 7, 7))))
+                    .addGroup(panelInfoLayout.createSequentialGroup()
+                        .addComponent(labelNama4, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labelVkosong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(52, 52, 52))
+                    .addGroup(panelInfoLayout.createSequentialGroup()
+                        .addGroup(panelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelheaderkamar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelheaderkamar1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         panelInfoLayout.setVerticalGroup(
             panelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(panelInfoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labelheaderkamar, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(panelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelvip, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelVvip))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelstandard, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelVstd))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelNama4)
+                    .addComponent(labelVkosong))
+                .addGap(70, 70, 70)
+                .addComponent(labelheaderkamar1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(panelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelInfoLayout.createSequentialGroup()
+                        .addComponent(labelvip1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(panelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(labelstandard1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelV30))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(panelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(labelNama5)
+                            .addComponent(labelV20)))
+                    .addComponent(labelV50))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btnResetc.setBackground(new java.awt.Color(-1,true));
@@ -590,7 +708,7 @@ private MemberModel memberModel;
 
         outputTotal.setBackground(new java.awt.Color(-1,true));
         outputTotal.setFont(new java.awt.Font("Dialog", 0, 18));
-        outputTotal.setText("100.000");
+        outputTotal.setText("0");
 
         btnHitungc.setBackground(new java.awt.Color(-1,true));
         btnHitungc.setText("Count");
@@ -1252,6 +1370,29 @@ bg2.add(getRadiob20());
         valuePanel.add(checkPanel);
         valuePanel.repaint();
         valuePanel.revalidate();
+        
+                 HargaDao harga = null;
+     try {
+         harga = Database.getHargaDao();
+     } catch (SQLException ex) {
+         Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
+     }
+        List<Harga> list = null;
+     try {
+         list = harga.selectallHarga();
+     } catch (HargaException ex) {
+         Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
+     }
+        int hrgv50 = list.get(0).getH50mbps();
+        int hrgv30 = list.get(0).getH30mbps();
+        int hrgv20 = list.get(0).getH20mbps();
+        int hrgvip = list.get(0).getHvip();
+        int hrgstd = list.get(0).getHstandard();
+        int hrgempty = list.get(0).getHkosong();
+        
+        labelVvip.setText("Rp. "+Integer.toString(hrgvip));
+        labelVstd.setText("Rp. "+Integer.toString(hrgstd));
+        labelVkosong.setText("Rp. "+Integer.toString(hrgempty));
     }//GEN-LAST:event_btnCheckActionPerformed
 
     private void btnMemberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMemberActionPerformed
@@ -1568,11 +1709,25 @@ bg2.add(getRadiob20());
     private javax.swing.JLabel labelAlamat;
     private javax.swing.JLabel labelJk;
     private javax.swing.JLabel labelNama;
+    private javax.swing.JLabel labelNama4;
+    private javax.swing.JLabel labelNama5;
     private javax.swing.JLabel labelNohp;
     private javax.swing.JLabel labelSewa;
     private javax.swing.JLabel labelTipekamar;
     private javax.swing.JLabel labelTotal;
+    private javax.swing.JLabel labelV20;
+    private javax.swing.JLabel labelV30;
+    private javax.swing.JLabel labelV50;
+    private javax.swing.JLabel labelVkosong;
+    private javax.swing.JLabel labelVstd;
+    private javax.swing.JLabel labelVvip;
     private javax.swing.JLabel labelWifi;
+    private javax.swing.JLabel labelheaderkamar;
+    private javax.swing.JLabel labelheaderkamar1;
+    private javax.swing.JLabel labelstandard;
+    private javax.swing.JLabel labelstandard1;
+    private javax.swing.JLabel labelvip;
+    private javax.swing.JLabel labelvip1;
     private javax.swing.JPanel memberPanel;
     private javax.swing.JPanel menuPanel;
     private javax.swing.JLabel outputTotal;

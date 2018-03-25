@@ -19,6 +19,7 @@ import database.Database;
 import enity.Harga;
 import enity.Member;
 import error.HargaException;
+import error.MemberException;
 
 import event.MemberListiner;
 import java.awt.Color;
@@ -36,6 +37,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import model.MemberModel;
 import service.HargaDao;
+import service.Service_member_dao;
 
 
 /**
@@ -50,13 +52,19 @@ private MemberModel memberModel;
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                new ViewMain().setVisible(true);
+                try {
+                    new ViewMain().setVisible(true);
+                } catch (MemberException ex) {
+                    Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
         
     /** Creates new form Main */
-    public ViewMain() {
+    public ViewMain() throws MemberException, SQLException {
         memberModel = new MemberModel();
         memberModel.setListiner(this);
         
@@ -68,6 +76,7 @@ private MemberModel memberModel;
         groupjk();
         groupButtontipe_kamar();
         groupButtontipe_wifi();
+        countMember();
         setExtendedState(JFrame.MAXIMIZED_HORIZ );
         setVisible(true);
         setResizable(false);
@@ -97,8 +106,10 @@ private MemberModel memberModel;
         homePanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
+        totalMember = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
+        totalPendapatan = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         checkPanel = new javax.swing.JPanel();
@@ -379,21 +390,32 @@ private MemberModel memberModel;
         jLabel6.setFont(new java.awt.Font("Dialog", 0, 18));
         jLabel6.setText("Member");
 
+        totalMember.setFont(new java.awt.Font("Dialog", 1, 48));
+        totalMember.setText("0");
+        totalMember.setAlignmentY(0.0F);
+        totalMember.setPreferredSize(new java.awt.Dimension(10, 24));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel6)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel6))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(114, 114, 114)
+                        .addComponent(totalMember, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(81, 81, 81))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jLabel6)
-                .addContainerGap(100, Short.MAX_VALUE))
+                .addGap(29, 29, 29)
+                .addComponent(totalMember, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(-1,true));
@@ -401,21 +423,32 @@ private MemberModel memberModel;
         jLabel7.setFont(new java.awt.Font("Dialog", 0, 18));
         jLabel7.setText("Total Pendapatan");
 
+        totalPendapatan.setFont(new java.awt.Font("Dialog", 1, 48));
+        totalPendapatan.setText("0");
+        totalPendapatan.setAlignmentY(0.0F);
+        totalPendapatan.setPreferredSize(new java.awt.Dimension(10, 24));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(115, 115, 115)
+                        .addComponent(totalPendapatan, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(133, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jLabel7)
-                .addContainerGap(100, Short.MAX_VALUE))
+                .addGap(29, 29, 29)
+                .addComponent(totalPendapatan, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(-1,true));
@@ -430,14 +463,14 @@ private MemberModel memberModel;
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel8)
-                .addContainerGap(464, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel8)
-                .addContainerGap(355, Short.MAX_VALUE))
+                .addContainerGap(296, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout homePanelLayout = new javax.swing.GroupLayout(homePanel);
@@ -458,9 +491,9 @@ private MemberModel memberModel;
             homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(homePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -1217,7 +1250,19 @@ private MemberModel memberModel;
     }// </editor-fold>//GEN-END:initComponents
 
     //Section FormCheckIN
+private void countMember() throws MemberException, SQLException{
     
+     int countm = 0;
+     Service_member_dao member=Database.getMemberDao();
+     List<Member> listmember = member.selectallmember();
+
+for(Member  value : listmember)
+    {
+    countm+=1;
+    }
+totalMember.setText(Integer.toString(countm));
+
+}  
     
  private void groupButtontipe_kamar( ) {
 
@@ -1351,8 +1396,14 @@ bg2.add(getRadiob20());
     }
 //    Section Awal Tampilan
     private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
-        // TODO add your handling code here:
-        
+     try {
+         // TODO add your handling code here:
+         countMember();
+     } catch (MemberException ex) {
+         Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
+     } catch (SQLException ex) {
+         Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
+     }
         //remove panel
         valuePanel.removeAll();
         valuePanel.repaint();
@@ -1760,6 +1811,8 @@ bg2.add(getRadiob20());
     private javax.swing.JRadioButton radiobperempuan;
     private javax.swing.JPanel reportPanel;
     private javax.swing.JLabel title;
+    private javax.swing.JLabel totalMember;
+    private javax.swing.JLabel totalPendapatan;
     private javax.swing.JTextField valueAlamat;
     private javax.swing.JTextField valueNama;
     private javax.swing.JTextField valueNohp;

@@ -84,6 +84,7 @@ private final String getall = "SELECT *From tbl_member";
             connection.setAutoCommit(false);
             statement = connection.createStatement();
             ResultSet result =statement.executeQuery(getall);
+           
             Member member = null;
             while (result.next())
             {
@@ -102,7 +103,7 @@ private final String getall = "SELECT *From tbl_member";
                 list.add(member);
                 connection.commit();
             }              
-               
+
             return list;
            
         } catch (SQLException e) {

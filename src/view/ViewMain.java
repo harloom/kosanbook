@@ -1585,7 +1585,8 @@ bg2.add(getRadiob20());
     }//GEN-LAST:event_btnResetcActionPerformed
 
     private void btnHitungcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHitungcActionPerformed
-     try {
+    
+        try {
          membercontroller.count(this);
      } catch (SQLException ex) {
          Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);

@@ -60,8 +60,13 @@ public class MemberController {
         String nama = inputmember.getValueNama().getText();
         String alamat = inputmember.getValueAlamat().getText();       
         String ls =inputmember.getValueSewa().getText();
+        if(ls.length()<1){
+         JOptionPane.showMessageDialog(inputmember, "Silahkan Inputkan Sewa ,Master");
+           return;
+        }
+        Integer lamasewa = Integer.parseInt(ls);
 //        convert lama sew;
-        Integer lamasewa = Integer.parseInt(ls);     
+      
         String nohp =  inputmember.getValueNohp().getText();
         String tipe_kamar = "";
         String wifi = "";
@@ -157,7 +162,12 @@ totalkesuruhan = totalinternet+totalkamar;
         
            }
     
-  public void count(ViewMain inputmember) throws SQLException, HargaException
+    
+    
+    
+    
+    
+   public void count(ViewMain inputmember) throws SQLException, HargaException
   {
       
       HargaDao harga = Database.getHargaDao();
@@ -183,6 +193,10 @@ totalkesuruhan = totalinternet+totalkamar;
         Integer totalkamar = null,totalinternet= null,totalkesuruhan;
 
         String ls =inputmember.getValueSewa().getText();
+        if(ls.length()<1){
+         JOptionPane.showMessageDialog(inputmember, "Silahkan Inputkan Sewa ,Master");
+           return;
+        }
 //        convert lama sew;
         Integer lamasewa = Integer.parseInt(ls); 
               if(vip.isSelected()){

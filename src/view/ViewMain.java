@@ -30,6 +30,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -639,11 +640,11 @@ private MemberModel memberModel;
                                 .addComponent(labelVvip, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(45, 45, 45))
                             .addGroup(panelInfoLayout.createSequentialGroup()
-                                .addComponent(labelVstd, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+                                .addComponent(labelVstd, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
                                 .addGap(59, 59, 59))
                             .addComponent(labelV50, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(panelInfoLayout.createSequentialGroup()
-                                .addComponent(labelV30, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                                .addComponent(labelV30, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
                                 .addGap(14, 14, 14))
                             .addGroup(panelInfoLayout.createSequentialGroup()
                                 .addComponent(labelV20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -733,7 +734,11 @@ private MemberModel memberModel;
             .addGroup(checkPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(checkPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(labelTotal)
+                    .addGroup(checkPanelLayout.createSequentialGroup()
+                        .addComponent(labelTotal)
+                        .addGap(18, 18, 18)
+                        .addComponent(outputTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(51, 51, 51))
                     .addGroup(checkPanelLayout.createSequentialGroup()
                         .addGroup(checkPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelNama)
@@ -744,49 +749,41 @@ private MemberModel memberModel;
                             .addComponent(labelJk)
                             .addComponent(labelWifi))
                         .addGap(36, 36, 36)
-                        .addGroup(checkPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(valueNohp)
-                            .addComponent(valueSewa)
-                            .addComponent(valueAlamat)
-                            .addComponent(valueNama)
+                        .addGroup(checkPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(checkPanelLayout.createSequentialGroup()
+                                .addComponent(radiobLaki)
+                                .addGap(18, 18, 18)
+                                .addComponent(radiobperempuan))
                             .addGroup(checkPanelLayout.createSequentialGroup()
                                 .addGroup(checkPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(checkPanelLayout.createSequentialGroup()
-                                        .addComponent(radiobLaki)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(radiobperempuan))
-                                    .addGroup(checkPanelLayout.createSequentialGroup()
-                                        .addGroup(checkPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(radiob50)
-                                            .addComponent(radiobVip))
-                                        .addGap(2, 2, 2)
-                                        .addGroup(checkPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(radiobStandard)
-                                            .addComponent(radiob30))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(checkPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(radiob20, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(radiobEmpty, javax.swing.GroupLayout.Alignment.LEADING)))
-                                    .addGroup(checkPanelLayout.createSequentialGroup()
-                                        .addComponent(btnsimpan)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btnResetc)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(btnHitungc)))
-                                .addGap(30, 30, 30)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(checkPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(outputTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
-                    .addComponent(panelInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                                    .addComponent(radiob50)
+                                    .addComponent(radiobVip))
+                                .addGap(2, 2, 2)
+                                .addGroup(checkPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(radiobStandard)
+                                    .addComponent(radiob30))
+                                .addGap(18, 18, 18)
+                                .addGroup(checkPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(radiob20, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(radiobEmpty, javax.swing.GroupLayout.Alignment.LEADING)))
+                            .addGroup(checkPanelLayout.createSequentialGroup()
+                                .addComponent(btnsimpan)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnResetc)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnHitungc))
+                            .addComponent(valueSewa, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
+                            .addComponent(valueAlamat)
+                            .addComponent(valueNama)
+                            .addComponent(valueNohp))
+                        .addGap(18, 18, 18)
+                        .addComponent(panelInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         checkPanelLayout.setVerticalGroup(
             checkPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(checkPanelLayout.createSequentialGroup()
-                .addGroup(checkPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, checkPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(panelInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(checkPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(checkPanelLayout.createSequentialGroup()
                         .addGap(156, 156, 156)
                         .addGroup(checkPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -832,8 +829,12 @@ private MemberModel memberModel;
                         .addGroup(checkPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnResetc)
                             .addComponent(btnHitungc)
-                            .addComponent(btnsimpan))))
-                .addGap(38, 38, 38)
+                            .addComponent(btnsimpan))
+                        .addGap(38, 38, 38))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, checkPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(panelInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)))
                 .addGroup(checkPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelTotal)
                     .addComponent(outputTotal))
@@ -1294,6 +1295,11 @@ bg2.add(getRadiob20());
         this.valueSewa = valueSewa;
     }
 
+    public JLabel getOutputTotal() {
+        return outputTotal;
+    }
+    
+
     public JRadioButton getRadiob20() {
         return radiob20;
     }
@@ -1393,6 +1399,9 @@ bg2.add(getRadiob20());
         labelVvip.setText("Rp. "+Integer.toString(hrgvip));
         labelVstd.setText("Rp. "+Integer.toString(hrgstd));
         labelVkosong.setText("Rp. "+Integer.toString(hrgempty));
+        labelV50.setText("Rp. "+Integer.toString(hrgv50));
+        labelV30.setText("Rp. "+Integer.toString(hrgv30));
+        labelV20.setText("Rp. "+Integer.toString(hrgv20));
     }//GEN-LAST:event_btnCheckActionPerformed
 
     private void btnMemberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMemberActionPerformed
@@ -1576,7 +1585,13 @@ bg2.add(getRadiob20());
     }//GEN-LAST:event_btnResetcActionPerformed
 
     private void btnHitungcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHitungcActionPerformed
-    
+     try {
+         membercontroller.count(this);
+     } catch (SQLException ex) {
+         Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
+     } catch (HargaException ex) {
+         Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
+     }
     }//GEN-LAST:event_btnHitungcActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed

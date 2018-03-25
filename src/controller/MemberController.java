@@ -156,6 +156,71 @@ totalkesuruhan = totalinternet+totalkamar;
         }
         
            }
+    
+  public void count(ViewMain inputmember) throws SQLException, HargaException
+  {
+      
+      HargaDao harga = Database.getHargaDao();
+        List<Harga> list = harga.selectallHarga();
+        int hrgv50 = list.get(0).getH50mbps();
+        int hrgv30 = list.get(0).getH30mbps();
+        int hrgv20 = list.get(0).getH20mbps();
+        int hrgvip = list.get(0).getHvip();
+        int hrgstd = list.get(0).getHstandard();
+        int hrgempty = list.get(0).getHkosong();
+        //tipe Kamar 
+        JRadioButton vip = inputmember.getRadiobVip();
+        JRadioButton stand = inputmember.getRadiobStandard();
+        JRadioButton kosong = inputmember.getRadiobEmpty();        
+         // akhir tipe kamar        
+         
+//         tipe Wifi
+        JRadioButton v50 = inputmember.getRadiob50();
+        JRadioButton v30 = inputmember.getRadiob30();
+        JRadioButton v20 = inputmember.getRadiob30(); 
+        String tipe_kamar = "";
+        String wifi = "";
+        Integer totalkamar = null,totalinternet= null,totalkesuruhan;
+
+        String ls =inputmember.getValueSewa().getText();
+//        convert lama sew;
+        Integer lamasewa = Integer.parseInt(ls); 
+              if(vip.isSelected()){
+      
+            totalkamar = lamasewa*hrgvip;
+        }else if(stand.isSelected()){
+
+            totalkamar = lamasewa*hrgstd;
+        } else if(kosong.isSelected()){
+
+            totalkamar = lamasewa*hrgempty;
+        } else{ 
+        JOptionPane.showMessageDialog(inputmember, "Silahkan Pilih Tipe Kamar");
+        }
+        
+        if(v50.isSelected()){
+
+          totalinternet = lamasewa*hrgv50;
+        }else if(v30.isSelected()){
+
+           totalinternet = lamasewa*hrgv30;
+        } else if(v20.isSelected()){
+   
+           totalinternet = lamasewa*hrgv20;
+        } else{ 
+  
+            totalinternet = lamasewa*0;
+          
+        }
+        
+        //perjumlahan
+            totalkesuruhan = totalinternet+totalkamar;
+            inputmember.getOutputTotal().setText("Rp. "+Integer.toString(totalkesuruhan));
+    }
+    
+    
+    
+    
     }
 
 

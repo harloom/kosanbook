@@ -177,7 +177,7 @@ totalkesuruhan = totalinternet+totalkamar;
 //         tipe Wifi
         JRadioButton v50 = inputmember.getRadiob50();
         JRadioButton v30 = inputmember.getRadiob30();
-        JRadioButton v20 = inputmember.getRadiob30(); 
+        JRadioButton v20 = inputmember.getRadiob20(); 
         String tipe_kamar = "";
         String wifi = "";
         Integer totalkamar = null,totalinternet= null,totalkesuruhan;

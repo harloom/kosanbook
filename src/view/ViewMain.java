@@ -1771,6 +1771,7 @@ bg2.add(getRadiob20());
         valueAlamat.setText(string);
         valueNohp.setText(string);
         valueSewa.setText(string);
+        outputTotal.setText("0");
     }
 
     @Override

@@ -52,7 +52,7 @@ public class MemberController {
 //         tipe Wifi
         JRadioButton v50 = inputmember.getRadiob50();
         JRadioButton v30 = inputmember.getRadiob30();
-        JRadioButton v20 = inputmember.getRadiob30();        
+        JRadioButton v20 = inputmember.getRadiob20();        
          // akhir tipe wifi  
           JRadioButton lk = inputmember.getRadiobLaki();
         JRadioButton pr = inputmember.getRadiobperempuan();

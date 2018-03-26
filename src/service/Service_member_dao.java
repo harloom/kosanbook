@@ -18,5 +18,6 @@ public interface Service_member_dao {
     
     //memasang metode yang di gunakan;
     public void insertMember(Member member) throws MemberException;
-    public List<Member> selectallmember() throws  MemberException;  
+    public List<Member> selectallmember() throws  MemberException; 
+    public  List<Member> cariMember(String nama) throws MemberException;
 }

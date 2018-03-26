@@ -27,6 +27,7 @@ private Connection connection;
 private final String insertMember ="INSERT INTO tbl_member (nama,jenis_kelamin,alamat,sewa,nohp,"
         + "tipe_kamar,tipe_wifi,total,tanggal_masuk,expire) VALUE (?,?,?,?,?,?,?,?,?,?)";
 private final String getall = "SELECT *From tbl_member";
+private  final String cari = "SELECT *From  tbl_member WHERE nama like ?";
 
     public MemberDaoimp(Connection connection) {
         this.connection = connection;
@@ -128,5 +129,65 @@ private final String getall = "SELECT *From tbl_member";
             }     
         }
     }
+
+    @Override
+    public  List<Member> cariMember(String nama) throws MemberException {
+        PreparedStatement statement = null;
+        ArrayList<Member> listcari = new ArrayList<Member>();
+                      
+        try {
+            connection.setAutoCommit(false);
+            statement = connection.prepareStatement(cari);
+            statement.setString(1, "%" + nama + "%");
+//            kalo select pake resource
+                //pake execute Query
+            ResultSet ss = statement.executeQuery();
+            Member member = null;
+       
+            if (ss.next()) {
+                member = new Member();
+                member.setId_member(ss.getInt("id_member"));
+                member.setNama(ss.getString("nama"));
+                member.setJenis_kelamin(ss.getString("jenis_kelamin"));
+                member.setAlamat(ss.getString("alamat"));
+                member.setSewa(ss.getInt("sewa"));
+                member.setNo_hp(ss.getString("nohp"));
+                member.setTipe_kamar(ss.getString("tipe_kamar"));
+                member.setTipe_wifi(ss.getString("tipe_wifi"));
+                member.setTotal(ss.getInt("total"));
+                member.setTanggal_masuk(ss.getString("tanggal_masuk"));
+                member.setExpire(ss.getString("expire"));
+                listcari.add(member);
+                
+            }else{
+                 throw  new MemberException("Member dengan nama "+nama+"  tidak di temukan");
+            }
+             connection.commit();
+            return listcari;
+           
+        } catch (SQLException e) {
+            try {
+                connection.rollback();
+            } catch (SQLException ex) {            
+            }
+//            pake titik
+             throw new MemberException(e.getMessage());
+       } finally{
+                try {
+                 connection.setAutoCommit(true);
+                 
+                    } catch (SQLException ex) {
+                    }
+                 if (statement !=null) {
+                     try {
+                            statement.close();
+                             } 
+                     catch (SQLException e) {       
+              }
+            }     
+        }
+    }
+
+
     
 }

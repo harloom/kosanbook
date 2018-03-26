@@ -48,12 +48,11 @@ public class Main {
 // }
 // int tp = 0;
  Service_member_dao member=Database.getMemberDao();
-List<Member> cari = member.cariMember("agil");
+ List<Member> cari = member.cariMember("ilham");
 
-for(Member isi:cari){
-    System.out.println(isi.getNama());
+for( Member ss : cari ){
+    System.out.println(ss.getNama());
 }
-//  System.out.println(cari.getNama());
         
 
 //for(Member  value : listmember)

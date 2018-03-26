@@ -34,8 +34,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import model.MemberModel;
+import model.TabelMemberModel;
 import service.HargaDao;
 import service.Service_member_dao;
 
@@ -45,7 +47,8 @@ import service.Service_member_dao;
  * @author Admin
  */
  public class ViewMain extends javax.swing.JFrame implements  MemberListiner{
- private MemberController membercontroller;
+private TabelMemberModel tabelmembermodel;
+private MemberController membercontroller;
 private MemberModel memberModel;
     
         public static void main(String args[]) {
@@ -65,6 +68,7 @@ private MemberModel memberModel;
         
     /** Creates new form Main */
     public ViewMain() throws MemberException, SQLException {
+        tabelmembermodel = new TabelMemberModel();
         memberModel = new MemberModel();
         memberModel.setListiner(this);
         
@@ -73,14 +77,19 @@ private MemberModel memberModel;
         
         
         initComponents();
+        tabelmember.setModel(tabelmembermodel);
+        
         groupjk();
         groupButtontipe_kamar();
         groupButtontipe_wifi();
         countMember();
+        loadDatatabel();
         setExtendedState(JFrame.MAXIMIZED_HORIZ );
         setVisible(true);
         setResizable(false);
     }
+    
+    
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -156,7 +165,7 @@ private MemberModel memberModel;
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tabelmember = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
@@ -880,7 +889,7 @@ private MemberModel memberModel;
         jButton5.setBackground(new java.awt.Color(-1,true));
         jButton5.setText("Delete");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tabelmember.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -902,7 +911,7 @@ private MemberModel memberModel;
                 return types [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tabelmember);
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 18));
         jLabel3.setText("Cari");
@@ -1278,7 +1287,14 @@ StringBuffer sb = new StringBuffer(Integer.toString(tp));
 totalMember.setText(Integer.toString(countm));
 totalPendapatan.setText("Rp. "+sb.toString());
 }  
-    
+ 
+private void loadDatatabel() throws SQLException, MemberException
+{
+    Service_member_dao member=Database.getMemberDao();
+    tabelmembermodel.setList(member.selectallmember());
+}
+
+
  private void groupButtontipe_kamar( ) {
 
 ButtonGroup bg1 = new ButtonGroup( );
@@ -1353,6 +1369,10 @@ bg2.add(getRadiob20());
     //akhir Section FormCheckIN
     public void setValueSewa(JTextField valueSewa) {    
         this.valueSewa = valueSewa;
+    }
+
+    public JTable getTabelmember() {
+        return tabelmember;
     }
 
     public JLabel getOutputTotal() {
@@ -1471,8 +1491,14 @@ bg2.add(getRadiob20());
     }//GEN-LAST:event_btnCheckActionPerformed
 
     private void btnMemberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMemberActionPerformed
+    try {
         // TODO add your handling code here:
-        
+        loadDatatabel();
+    } catch (SQLException ex) {
+        Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (MemberException ex) {
+        Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
+    }
         //remove panel
         valuePanel.removeAll();
         valuePanel.repaint();
@@ -1778,7 +1804,6 @@ bg2.add(getRadiob20());
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField2;
@@ -1826,6 +1851,7 @@ bg2.add(getRadiob20());
     private javax.swing.JRadioButton radiobVip;
     private javax.swing.JRadioButton radiobperempuan;
     private javax.swing.JPanel reportPanel;
+    private javax.swing.JTable tabelmember;
     private javax.swing.JLabel title;
     private javax.swing.JLabel totalMember;
     private javax.swing.JLabel totalPendapatan;

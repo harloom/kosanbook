@@ -66,17 +66,36 @@ public class Main {
 //     System.out.println("kosong = "+valueHarga.getHkosong());
          
  }
- int countm = 0;
+ int tp = 0;
  Service_member_dao member=Database.getMemberDao();
 List<Member> listmember = member.selectallmember();
 
-//for(Member  value : listmember)
-//{
+for(Member  value : listmember)
+{
 
-//  countm+=1;
-//}
-        System.out.println(listmember.get(1).getNama());
-
+    tp+=value.getTotal();
+    
+}
+      StringBuffer sb = new StringBuffer(Integer.toString(tp));
+      if(sb.length()>=0 && sb.length()<=6){
+            sb.insert(3, ".");
+      }else if(sb.length()==7){
+          sb.insert(5, ".");
+      }else if(sb.length()==8){
+          sb.insert(2, ".");
+          sb.insert(6, ".");
+      }else if(sb.length()==9){
+          sb.insert(3, ".");
+          sb.insert(7, ".");
+      }else if(sb.length()==10){
+           sb.insert(1, ".");
+          sb.insert(5, ".");
+          sb.insert(9, ".");
+   
+      }
+    
+      System.out.println(sb); 
+System.out.println(tp);
 
     }
     

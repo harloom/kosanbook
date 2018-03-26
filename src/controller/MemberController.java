@@ -229,7 +229,7 @@ totalkesuruhan = totalinternet+totalkamar;
         
         //perjumlahan
             totalkesuruhan = totalinternet+totalkamar;
-            inputmember.getOutputTotal().setText("Rp. "+Integer.toString(totalkesuruhan));
+            inputmember.getOutputTotal().setText(Integer.toString(totalkesuruhan));
     }
     
     

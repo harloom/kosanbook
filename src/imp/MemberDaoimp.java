@@ -132,8 +132,8 @@ private  final String cari = "SELECT *From  tbl_member WHERE nama like ?";
 
     @Override
     public  List<Member> cariMember(String nama) throws MemberException {
-                        PreparedStatement statement = null;
-                        List<Member> lc = new ArrayList<Member>();
+        PreparedStatement statement = null;
+        ArrayList<Member> listcari = new ArrayList<Member>();
                       
         try {
             connection.setAutoCommit(false);
@@ -143,8 +143,8 @@ private  final String cari = "SELECT *From  tbl_member WHERE nama like ?";
                 //pake execute Query
             ResultSet ss = statement.executeQuery();
             Member member = null;
-            
-            while (ss.next()) {
+       
+            if (ss.next()) {
                 member = new Member();
                 member.setId_member(ss.getInt("id_member"));
                 member.setNama(ss.getString("nama"));
@@ -157,11 +157,13 @@ private  final String cari = "SELECT *From  tbl_member WHERE nama like ?";
                 member.setTotal(ss.getInt("total"));
                 member.setTanggal_masuk(ss.getString("tanggal_masuk"));
                 member.setExpire(ss.getString("expire"));
-                lc.add(member);
+                listcari.add(member);
                 
+            }else{
+                 throw  new MemberException("Member dengan nama "+nama+"  tidak di temukan");
             }
              connection.commit();
-            return lc;
+            return listcari;
            
         } catch (SQLException e) {
             try {

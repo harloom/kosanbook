@@ -925,8 +925,19 @@ private HargaModel hargaModel;
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 18));
         jLabel3.setText("Cari");
 
+        valueCari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                valueCariActionPerformed(evt);
+            }
+        });
+
         jButton1.setBackground(new java.awt.Color(-1,true));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons8-search-20.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout memberPanelLayout = new javax.swing.GroupLayout(memberPanel);
         memberPanel.setLayout(memberPanelLayout);
@@ -991,6 +1002,12 @@ private HargaModel hargaModel;
 
         jLabel15.setFont(new java.awt.Font("Dialog", 0, 18));
         jLabel15.setText("30 Mbps");
+
+        ih30.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ih30ActionPerformed(evt);
+            }
+        });
 
         jLabel16.setFont(new java.awt.Font("Dialog", 0, 18));
         jLabel16.setText("50 Mbps");
@@ -1806,7 +1823,7 @@ hargacontroller.selectdata(this);
     }//GEN-LAST:event_btnsimpanActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-            // TODO add your handling code here:
+    // TODO add your handling code here:
 
 Service_member_dao member = null;
     try {
@@ -1831,6 +1848,14 @@ for( Member ss : cari ){
 }
 JOptionPane.showMessageDialog(null,output);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void valueCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valueCariActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_valueCariActionPerformed
+
+    private void ih30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ih30ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ih30ActionPerformed
          
    /**
      * @param args the command line arguments

@@ -100,6 +100,7 @@ public class HargaModel {
         harga.setHstandard(hstd);
         harga.setHkosong(hkosong);
         harga.setId(1);
+        harga.setTanggal_update(tanggal_up);
         upharga.updateHargaall(harga);
         
     }

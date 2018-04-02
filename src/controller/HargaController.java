@@ -50,15 +50,15 @@ public void updateharga(ViewMain viewMain) throws HargaException,SQLException  {
                
   
              hargaModel.setHvip(vip);
-             hargaModel.setHvip(std);
-             hargaModel.setHvip(kosong);
-             hargaModel.setHvip(h50);   
-             hargaModel.setHvip(h30);
-             hargaModel.setHvip(h20);
+             hargaModel.setHstd(std);
+             hargaModel.setHkosong(kosong);
+             hargaModel.setH50(h50);   
+             hargaModel.setH30(h30);
+             hargaModel.setH20(h20);
              hargaModel.setTanggal_up(tanggal_up);
             try {
                 hargaModel.updateHarga();
-                 JOptionPane.showMessageDialog(viewMain, "HargaBerhasil Di Ubah");
+                 JOptionPane.showMessageDialog(viewMain, "Harga Berhasil Di Ubah");
 
             } catch (Throwable e) {
                  JOptionPane.showMessageDialog(viewMain, "Data gagal ke Di Ubah , Silahkan Hubungi Dev");

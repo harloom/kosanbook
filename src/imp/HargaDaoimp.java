@@ -29,9 +29,11 @@ public class HargaDaoimp  implements HargaDao{
     private String  d =",vip=? ";
     private String  e =",standard=? ";
     private String  f =",kosong=? ";
-    private final String  updateHargaalll = "UPDATE tbl_harga SET 50mbps =?, 30mbps=? ,20mpbs=?"
-            + "vip=? , standard=? ,kosong=? ,tanggal_update=?";
+    private final String  updateHargaalll = "UPDATE tbl_harga SET 50mbps =?, 30mbps=? ,20mbps=?"
+            + ",vip=? , standard=? ,kosong=? ,tanggal_update=? WHERE id= ?";
     private final String getHarga = "SELECT *From tbl_harga";
+    
+     private final String getByid = "SELECT *FROM tbl_harga WHERE id = ? ";
 
     public HargaDaoimp(Connection connection) {
         this.connection = connection;
@@ -48,8 +50,10 @@ public class HargaDaoimp  implements HargaDao{
             statement.setInt(2, harga.getH30mbps());
             statement.setInt(3, harga.getH20mbps());
             statement.setInt(4, harga.getHvip());
-            statement.setInt(5, harga.getHkosong());
-            statement.setString(6, harga.getTanggal_update());
+            statement.setInt(5, harga.getHstandard());
+            statement.setInt(6, harga.getHkosong());
+            statement.setString(7, harga.getTanggal_update());
+            statement.setInt(8, harga.getId());
             statement.executeUpdate();
 
          connection.commit();
@@ -75,10 +79,7 @@ public class HargaDaoimp  implements HargaDao{
         }         
     }
 
-    @Override
-    public void updateDataharga(Harga harga) throws HargaException {
-        
-    }
+
 
     @Override
     public List<Harga> selectallHarga() throws HargaException {
@@ -105,6 +106,58 @@ public class HargaDaoimp  implements HargaDao{
             }              
                
             return listharga;
+           
+        } catch (SQLException e) {
+            try {
+                connection.rollback();
+            } catch (SQLException ex) {            
+            }
+//            pake titik
+             throw new HargaException(e.getMessage());
+       } finally{
+                try {
+                 connection.setAutoCommit(true);
+                 
+                    } catch (SQLException ex) {
+                    }
+                 if (statement !=null) {
+                     try {
+                            statement.close();
+                             } 
+                     catch (SQLException e) {       
+              }
+            }     
+        }
+    }
+
+    @Override
+    public Harga getHarga(Integer id) throws HargaException{
+        PreparedStatement statement = null;
+        try {
+              connection.setAutoCommit(false);
+            statement = connection.prepareStatement(getByid);
+            statement.setInt(1, id);
+//            kalo select pake resource
+                //pake execute Query
+            ResultSet result = statement.executeQuery();
+            Harga harga = null;
+            
+            if (result.next()) {
+                harga = new Harga();
+                harga.setId(result.getInt("id"));
+                harga.setH50mbps(result.getInt("50mbps"));
+                harga.setH30mbps(result.getInt("30mbps"));
+                harga.setH20mbps(result.getInt("20mbps"));
+                harga.setHvip(result.getInt("vip"));
+                harga.setHstandard(result.getInt("standard"));
+                harga.setHkosong(result.getInt("kosong"));
+                harga.setTanggal_update(result.getString("tanggal_update"));
+                
+            }else{
+                 throw  new HargaException("Harga Gagal Di Update");
+            }
+               connection.commit();
+            return harga;
            
         } catch (SQLException e) {
             try {

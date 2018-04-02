@@ -16,6 +16,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.ListModel;
 import service.HargaDao;
 import service.Service_member_dao;
 
@@ -47,16 +50,19 @@ public class Main {
 //         
 // }
 // int tp = 0;
- Service_member_dao member=Database.getMemberDao();
-List<Member> cari = member.cariMember("agil");
+// Service_member_dao member=Database.getMemberDao();
+// List<Member> cari = member.cariMember("ilham");
+// String[] array = null;
+//
+// String output = null;
+//for( Member ss : cari ){
+//    String nama = ss.getNama().toString();
+//    String total = ss.getTotal().toString();
+//    String ex = ss.getExpire().toString();
+//    output += nama+" "+total+" "+ex+"\n";
+//}
+//JOptionPane.showMessageDialog(null, output);
 
-for(Member isi:cari){
-    System.out.println(isi.getNama());
-}
-//  System.out.println(cari.getNama());
-        
-
-//for(Member  value : listmember)
 //{
 //
 //    tp+=value.getTotal();
@@ -82,6 +88,11 @@ for(Member isi:cari){
 //    
 //      System.out.println(sb); 
 //System.out.println(tp);
+HargaDao upharga = Database.getHargaDao();
+Harga harga =  upharga.getHarga(1);
+harga.setH50mbps(120000);
+upharga.updateHargaall(harga);
+
 
     }
     

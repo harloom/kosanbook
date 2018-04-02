@@ -12,6 +12,7 @@ import java.util.Objects;
  * @author Hx-loom
  */
 public class Harga {
+    private Integer id;
     private Integer h50mbps;
     private Integer h30mbps;
     private Integer h20mbps;
@@ -19,6 +20,30 @@ public class Harga {
     private Integer hstandard;
     private Integer hkosong;
     private String tanggal_update;
+
+    public Harga(Integer id, Integer h50mbps, Integer h30mbps, Integer h20mbps, Integer hvip, Integer hstandard, Integer hkosong, String tanggal_update) {
+        this.id = id;
+        this.h50mbps = h50mbps;
+        this.h30mbps = h30mbps;
+        this.h20mbps = h20mbps;
+        this.hvip = hvip;
+        this.hstandard = hstandard;
+        this.hkosong = hkosong;
+        this.tanggal_update = tanggal_update;
+    }
+
+    public Harga() {
+        
+    }
+
+    
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Integer getH50mbps() {
         return h50mbps;
@@ -79,13 +104,14 @@ public class Harga {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 53 * hash + Objects.hashCode(this.h50mbps);
-        hash = 53 * hash + Objects.hashCode(this.h30mbps);
-        hash = 53 * hash + Objects.hashCode(this.h20mbps);
-        hash = 53 * hash + Objects.hashCode(this.hvip);
-        hash = 53 * hash + Objects.hashCode(this.hstandard);
-        hash = 53 * hash + Objects.hashCode(this.hkosong);
-        hash = 53 * hash + Objects.hashCode(this.tanggal_update);
+        hash = 41 * hash + Objects.hashCode(this.id);
+        hash = 41 * hash + Objects.hashCode(this.h50mbps);
+        hash = 41 * hash + Objects.hashCode(this.h30mbps);
+        hash = 41 * hash + Objects.hashCode(this.h20mbps);
+        hash = 41 * hash + Objects.hashCode(this.hvip);
+        hash = 41 * hash + Objects.hashCode(this.hstandard);
+        hash = 41 * hash + Objects.hashCode(this.hkosong);
+        hash = 41 * hash + Objects.hashCode(this.tanggal_update);
         return hash;
     }
 
@@ -102,6 +128,9 @@ public class Harga {
         }
         final Harga other = (Harga) obj;
         if (!Objects.equals(this.tanggal_update, other.tanggal_update)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         if (!Objects.equals(this.h50mbps, other.h50mbps)) {
@@ -124,6 +153,8 @@ public class Harga {
         }
         return true;
     }
+
+
     
     
     

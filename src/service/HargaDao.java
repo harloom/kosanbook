@@ -26,7 +26,8 @@ public interface HargaDao {
 
      */
     public void updateHargaall(Harga harga) throws HargaException;
-    public void updateDataharga(Harga harga) throws HargaException;
+//    public void updateDataharga(Harga harga) throws HargaException;
+    public  Harga  getHarga(Integer id) throws HargaException;
     public List<Harga> selectallHarga() throws  HargaException;  
 
     

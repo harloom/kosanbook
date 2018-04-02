@@ -14,6 +14,7 @@ package view;
 
 
 
+import controller.HargaController;
 import controller.MemberController;
 import database.Database;
 import enity.Harga;
@@ -36,6 +37,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import model.HargaModel;
+
 import model.MemberModel;
 import model.TabelMemberModel;
 import service.HargaDao;
@@ -50,6 +53,9 @@ import service.Service_member_dao;
 private TabelMemberModel tabelmembermodel;
 private MemberController membercontroller;
 private MemberModel memberModel;
+private HargaController hargacontroller;
+private HargaModel hargaModel;
+
     
         public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -75,6 +81,9 @@ private MemberModel memberModel;
         membercontroller = new MemberController();
         membercontroller.setModel(memberModel);
         
+        hargaModel = new HargaModel();
+        hargacontroller = new HargaController();
+        hargacontroller.setHargaModel(hargaModel);
         
         initComponents();
         tabelmember.setModel(tabelmembermodel);
@@ -1320,6 +1329,30 @@ bg2.add(getRadiob20());
      bg3.add(getRadiobLaki());
      bg3.add(getRadiobperempuan());
  }
+
+    public JTextField getIemp() {
+        return iemp;
+    }
+
+    public JTextField getIh20() {
+        return ih20;
+    }
+
+    public JTextField getIh30() {
+        return ih30;
+    }
+
+    public JTextField getIh50() {
+        return ih50;
+    }
+
+    public JTextField getIstd() {
+        return istd;
+    }
+
+    public JTextField getIvip() {
+        return ivip;
+    }
     
     public void setRadiob20(JRadioButton radiob20) {
         this.radiob20 = radiob20;
@@ -1511,7 +1544,15 @@ bg2.add(getRadiob20());
     }//GEN-LAST:event_btnMemberActionPerformed
 
     private void btnPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPriceActionPerformed
-        // TODO add your handling code here:
+    try {
+
+
+hargacontroller.selectdata(this);
+    } catch (SQLException ex) {
+        Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (HargaException ex) {
+        Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
+    }
         
         //remove panel
         valuePanel.removeAll();
@@ -1701,7 +1742,15 @@ bg2.add(getRadiob20());
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    try {
         // TODO add your handling code here:
+        hargacontroller.updateharga(this);
+//        hargacontroller.controllerHarga(this);
+    } catch (HargaException ex) {
+        Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (SQLException ex) {
+        Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
+    }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void radiobLakiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radiobLakiActionPerformed
@@ -1755,6 +1804,33 @@ bg2.add(getRadiob20());
      }
         System.out.println("click Simpan");
     }//GEN-LAST:event_btnsimpanActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+            // TODO add your handling code here:
+
+Service_member_dao member = null;
+    try {
+        member = Database.getMemberDao();
+    } catch (SQLException ex) {
+        Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
+    }
+ List<Member> cari = null;
+    try {
+        cari = member.cariMember(valueCari.getText());
+    } catch (MemberException ex) {
+        Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
+    }
+ String[] array = null;
+
+ String output ="";
+for( Member ss : cari ){
+    String nama = ss.getNama().toString();
+    String total = ss.getTotal().toString();
+    String ex = ss.getExpire().toString();
+   output += "Nama : "+nama+"   dan Total Biaya : "+total+"\t Masa Belaku :"+ex+"\n";
+}
+JOptionPane.showMessageDialog(null,output);
+    }//GEN-LAST:event_jButton1ActionPerformed
          
    /**
      * @param args the command line arguments

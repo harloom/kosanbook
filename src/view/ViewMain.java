@@ -1490,6 +1490,9 @@ bg2.add(getRadiob20());
          Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
      }
         //remove panel
+        menuPanel.setBackground(new Color(255,70,0));
+        bodyPanel.setBackground(new Color(255,128,0));
+        btnLogout.setBackground(new Color(255,128,0));
         valuePanel.removeAll();
         valuePanel.repaint();
         valuePanel.revalidate();
@@ -1502,7 +1505,9 @@ bg2.add(getRadiob20());
 
     private void btnCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckActionPerformed
         // TODO add your handling code here:
-        
+        bodyPanel.setBackground( new Color(45,152,218));
+        menuPanel.setBackground(new Color(56,103,214));
+        btnLogout.setBackground(new Color(56,103,214));
         //remove panel
         valuePanel.removeAll();
         valuePanel.repaint();
@@ -1570,7 +1575,9 @@ hargacontroller.selectdata(this);
     } catch (HargaException ex) {
         Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
     }
-        
+        bodyPanel.setBackground( new Color(252,92,101));
+        menuPanel.setBackground(new Color(235,59,90));
+        btnLogout.setBackground(new Color(235,59,90));
         //remove panel
         valuePanel.removeAll();
         valuePanel.repaint();

@@ -51,17 +51,18 @@ public class Main {
 // }
 // int tp = 0;
 // Service_member_dao member=Database.getMemberDao();
-// List<Member> cari = member.cariMember("ilham");
+// List<Member> cari = member.cariMember("");
 // String[] array = null;
 //
-// String output = null;
+// String output = "";
 //for( Member ss : cari ){
 //    String nama = ss.getNama().toString();
 //    String total = ss.getTotal().toString();
 //    String ex = ss.getExpire().toString();
 //    output += nama+" "+total+" "+ex+"\n";
+    
 //}
-//JOptionPane.showMessageDialog(null, output);
+//System.out.println(output);
 
 //{
 //
@@ -88,10 +89,10 @@ public class Main {
 //    
 //      System.out.println(sb); 
 //System.out.println(tp);
-HargaDao upharga = Database.getHargaDao();
-Harga harga =  upharga.getHarga(1);
-harga.setH50mbps(120000);
-upharga.updateHargaall(harga);
+//HargaDao upharga = Database.getHargaDao();
+//Harga harga =  upharga.getHarga(1);
+//harga.setH50mbps(120000);
+//upharga.updateHargaall(harga);
 
 
     }

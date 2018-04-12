@@ -178,6 +178,8 @@ private HargaModel hargaModel;
         jLabel3 = new javax.swing.JLabel();
         valueCari = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        Output_pencarian = new javax.swing.JTextArea();
         pricePanel = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -194,7 +196,7 @@ private HargaModel hargaModel;
         jLabel16 = new javax.swing.JLabel();
         ih50 = new javax.swing.JTextField();
         jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        cancel = new javax.swing.JButton();
         reportPanel = new javax.swing.JPanel();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
@@ -215,8 +217,8 @@ private HargaModel hargaModel;
 
         bodyPanel.setBackground(new java.awt.Color(-32768,true));
 
-        btnLogout.setBackground(new java.awt.Color(-32768,true));
-        btnLogout.setForeground(new java.awt.Color(-15598,true));
+        btnLogout.setBackground(new java.awt.Color(-47616,true));
+        btnLogout.setForeground(new java.awt.Color(-32768,true));
         btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons8-shutdown-26.png"))); // NOI18N
         btnLogout.setBorder(null);
         btnLogout.setBorderPainted(false);
@@ -236,6 +238,7 @@ private HargaModel hargaModel;
         btnHome.setFont(new java.awt.Font("Dialog", 1, 18));
         btnHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons8-home-button-filled-50.png"))); // NOI18N
         btnHome.setText("Home");
+        btnHome.setBorder(null);
         btnHome.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnHome.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnHome.setIconTextGap(15);
@@ -257,6 +260,7 @@ private HargaModel hargaModel;
         btnCheck.setFont(new java.awt.Font("Dialog", 1, 18));
         btnCheck.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons8-audit-filled-50.png"))); // NOI18N
         btnCheck.setText("Check In");
+        btnCheck.setBorder(null);
         btnCheck.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCheck.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnCheck.setIconTextGap(15);
@@ -278,6 +282,7 @@ private HargaModel hargaModel;
         btnMember.setFont(new java.awt.Font("Dialog", 1, 18));
         btnMember.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons8-user-groups-filled-50.png"))); // NOI18N
         btnMember.setText("Member");
+        btnMember.setBorder(null);
         btnMember.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnMember.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnMember.setIconTextGap(15);
@@ -299,6 +304,7 @@ private HargaModel hargaModel;
         btnPrice.setFont(new java.awt.Font("Dialog", 1, 18));
         btnPrice.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons8-us-dollar-filled-50.png"))); // NOI18N
         btnPrice.setText("Price Setting");
+        btnPrice.setBorder(null);
         btnPrice.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnPrice.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnPrice.setIconTextGap(15);
@@ -320,6 +326,7 @@ private HargaModel hargaModel;
         btnReport.setFont(new java.awt.Font("Dialog", 1, 18));
         btnReport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons8-report-card-filled-50.png"))); // NOI18N
         btnReport.setText("Report");
+        btnReport.setBorder(null);
         btnReport.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnReport.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnReport.setIconTextGap(15);
@@ -341,6 +348,7 @@ private HargaModel hargaModel;
         btnPassword.setFont(new java.awt.Font("Dialog", 1, 18));
         btnPassword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons8-secure-filled-50.png"))); // NOI18N
         btnPassword.setText("Password");
+        btnPassword.setBorder(null);
         btnPassword.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnPassword.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnPassword.setIconTextGap(15);
@@ -455,7 +463,7 @@ private HargaModel hargaModel;
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 41, Short.MAX_VALUE)
+                .addGap(0, 72, Short.MAX_VALUE)
                 .addComponent(totalPendapatan, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -538,6 +546,7 @@ private HargaModel hargaModel;
         labelWifi.setFont(new java.awt.Font("Dialog", 0, 18));
         labelWifi.setText("Wi-Fi");
 
+        valueNohp.setBorder(null);
         valueNohp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 valueNohpActionPerformed(evt);
@@ -549,6 +558,7 @@ private HargaModel hargaModel;
             }
         });
 
+        valueSewa.setBorder(null);
         valueSewa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 valueSewaActionPerformed(evt);
@@ -560,12 +570,14 @@ private HargaModel hargaModel;
             }
         });
 
+        valueAlamat.setBorder(null);
         valueAlamat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 valueAlamatActionPerformed(evt);
             }
         });
 
+        valueNama.setBorder(null);
         valueNama.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 valueNamaActionPerformed(evt);
@@ -689,11 +701,11 @@ private HargaModel hargaModel;
                                 .addComponent(labelVvip, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(45, 45, 45))
                             .addGroup(panelInfoLayout.createSequentialGroup()
-                                .addComponent(labelVstd, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
+                                .addComponent(labelVstd, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
                                 .addGap(59, 59, 59))
                             .addComponent(labelV50, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(panelInfoLayout.createSequentialGroup()
-                                .addComponent(labelV30, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
+                                .addComponent(labelV30, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
                                 .addGap(14, 14, 14))
                             .addGroup(panelInfoLayout.createSequentialGroup()
                                 .addComponent(labelV20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -746,6 +758,7 @@ private HargaModel hargaModel;
 
         btnResetc.setBackground(new java.awt.Color(-1,true));
         btnResetc.setText("Reset");
+        btnResetc.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btnResetc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnResetcActionPerformed(evt);
@@ -762,6 +775,7 @@ private HargaModel hargaModel;
 
         btnHitungc.setBackground(new java.awt.Color(-1,true));
         btnHitungc.setText("Count");
+        btnHitungc.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btnHitungc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHitungcActionPerformed(evt);
@@ -770,6 +784,7 @@ private HargaModel hargaModel;
 
         btnsimpan.setBackground(new java.awt.Color(-1,true));
         btnsimpan.setText("Simpan");
+        btnsimpan.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btnsimpan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnsimpanActionPerformed(evt);
@@ -790,41 +805,44 @@ private HargaModel hargaModel;
                         .addGap(51, 51, 51))
                     .addGroup(checkPanelLayout.createSequentialGroup()
                         .addGroup(checkPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelNama)
-                            .addComponent(labelNohp)
-                            .addComponent(labelTipekamar)
-                            .addComponent(labelSewa)
-                            .addComponent(labelAlamat)
-                            .addComponent(labelJk)
-                            .addComponent(labelWifi))
-                        .addGap(36, 36, 36)
-                        .addGroup(checkPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(checkPanelLayout.createSequentialGroup()
-                                .addComponent(radiobLaki)
-                                .addGap(18, 18, 18)
-                                .addComponent(radiobperempuan))
                             .addGroup(checkPanelLayout.createSequentialGroup()
                                 .addGroup(checkPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(radiob50)
-                                    .addComponent(radiobVip))
-                                .addGap(2, 2, 2)
-                                .addGroup(checkPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(radiobStandard)
-                                    .addComponent(radiob30))
-                                .addGap(18, 18, 18)
-                                .addGroup(checkPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(radiob20, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(radiobEmpty, javax.swing.GroupLayout.Alignment.LEADING)))
+                                    .addComponent(labelNama)
+                                    .addComponent(labelNohp)
+                                    .addComponent(labelTipekamar)
+                                    .addComponent(labelSewa)
+                                    .addComponent(labelAlamat)
+                                    .addComponent(labelJk)
+                                    .addComponent(labelWifi))
+                                .addGap(36, 36, 36)
+                                .addGroup(checkPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(checkPanelLayout.createSequentialGroup()
+                                        .addComponent(radiobLaki)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(radiobperempuan))
+                                    .addComponent(valueSewa, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
+                                    .addComponent(valueAlamat)
+                                    .addComponent(valueNama)
+                                    .addComponent(valueNohp)
+                                    .addGroup(checkPanelLayout.createSequentialGroup()
+                                        .addGroup(checkPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(radiob50)
+                                            .addComponent(radiobVip))
+                                        .addGap(2, 2, 2)
+                                        .addGroup(checkPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(radiobStandard)
+                                            .addComponent(radiob30))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(checkPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(radiob20, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(radiobEmpty, javax.swing.GroupLayout.Alignment.LEADING)))))
                             .addGroup(checkPanelLayout.createSequentialGroup()
-                                .addComponent(btnsimpan)
+                                .addGap(54, 54, 54)
+                                .addComponent(btnsimpan, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(27, 27, 27)
+                                .addComponent(btnResetc, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnResetc)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnHitungc))
-                            .addComponent(valueSewa, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
-                            .addComponent(valueAlamat)
-                            .addComponent(valueNama)
-                            .addComponent(valueNohp))
+                                .addComponent(btnHitungc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(18, 18, 18)
                         .addComponent(panelInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())))
@@ -877,7 +895,7 @@ private HargaModel hargaModel;
                         .addGap(26, 26, 26)
                         .addGroup(checkPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnResetc)
-                            .addComponent(btnHitungc)
+                            .addComponent(btnHitungc, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnsimpan))
                         .addGap(38, 38, 38))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, checkPanelLayout.createSequentialGroup()
@@ -920,11 +938,13 @@ private HargaModel hargaModel;
                 return types [columnIndex];
             }
         });
+        tabelmember.setGridColor(new java.awt.Color(255, 255, 255));
         jScrollPane2.setViewportView(tabelmember);
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 18));
         jLabel3.setText("Cari");
 
+        valueCari.setBorder(null);
         valueCari.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 valueCariActionPerformed(evt);
@@ -933,11 +953,17 @@ private HargaModel hargaModel;
 
         jButton1.setBackground(new java.awt.Color(-1,true));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons8-search-20.png"))); // NOI18N
+        jButton1.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+
+        Output_pencarian.setColumns(20);
+        Output_pencarian.setRows(5);
+        Output_pencarian.setBorder(null);
+        jScrollPane3.setViewportView(Output_pencarian);
 
         javax.swing.GroupLayout memberPanelLayout = new javax.swing.GroupLayout(memberPanel);
         memberPanel.setLayout(memberPanelLayout);
@@ -951,28 +977,34 @@ private HargaModel hargaModel;
                         .addGap(18, 18, 18)
                         .addComponent(jButton5))
                     .addGroup(memberPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(47, 47, 47)
                         .addGroup(memberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
                             .addGroup(memberPanelLayout.createSequentialGroup()
-                                .addComponent(valueCari, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGroup(memberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(memberPanelLayout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(valueCari, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 567, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(34, 34, 34))
         );
         memberPanelLayout.setVerticalGroup(
             memberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, memberPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(memberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, memberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addContainerGap(16, Short.MAX_VALUE)
+                .addGroup(memberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(memberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel3)
-                        .addComponent(valueCari)))
-                .addGap(51, 51, 51)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(valueCari, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(memberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton5)
@@ -994,8 +1026,16 @@ private HargaModel hargaModel;
         jLabel12.setFont(new java.awt.Font("Dialog", 0, 18));
         jLabel12.setText("Empty");
 
+        ivip.setBorder(null);
+
+        istd.setBorder(null);
+
+        iemp.setBorder(null);
+
         jLabel13.setFont(new java.awt.Font("Dialog", 0, 18));
         jLabel13.setText("Harga Sewa Wi-Fi");
+
+        ih20.setBorder(null);
 
         jLabel14.setFont(new java.awt.Font("Dialog", 0, 18));
         jLabel14.setText("20 Mbps");
@@ -1003,6 +1043,7 @@ private HargaModel hargaModel;
         jLabel15.setFont(new java.awt.Font("Dialog", 0, 18));
         jLabel15.setText("30 Mbps");
 
+        ih30.setBorder(null);
         ih30.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ih30ActionPerformed(evt);
@@ -1012,19 +1053,23 @@ private HargaModel hargaModel;
         jLabel16.setFont(new java.awt.Font("Dialog", 0, 18));
         jLabel16.setText("50 Mbps");
 
+        ih50.setBorder(null);
+
         jButton6.setBackground(new java.awt.Color(-1,true));
         jButton6.setText("Save");
+        jButton6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
             }
         });
 
-        jButton7.setBackground(new java.awt.Color(-1,true));
-        jButton7.setText("Cancel");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        cancel.setBackground(new java.awt.Color(-1,true));
+        cancel.setText("Cancel");
+        cancel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        cancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                cancelActionPerformed(evt);
             }
         });
 
@@ -1035,38 +1080,33 @@ private HargaModel hargaModel;
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pricePanelLayout.createSequentialGroup()
                 .addGap(119, 119, 119)
                 .addGroup(pricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pricePanelLayout.createSequentialGroup()
+                    .addGroup(pricePanelLayout.createSequentialGroup()
                         .addGroup(pricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
                             .addComponent(jLabel11)
                             .addComponent(jLabel12))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(pricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGap(40, 40, 40)
+                        .addGroup(pricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(istd)
-                            .addComponent(iemp, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(ivip, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(ivip)
+                            .addComponent(iemp, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(pricePanelLayout.createSequentialGroup()
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cancel, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel13)
                     .addGroup(pricePanelLayout.createSequentialGroup()
                         .addGroup(pricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel16)
                             .addComponent(jLabel15)
                             .addComponent(jLabel14))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(50, 50, 50)
                         .addGroup(pricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(ih50)
-                            .addComponent(ih20, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(ih30, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pricePanelLayout.createSequentialGroup()
-                                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)))
-                        .addGap(4, 4, 4))
-                    .addGroup(pricePanelLayout.createSequentialGroup()
-                        .addGroup(pricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel13))
-                        .addGap(261, 261, 261)))
-                .addGap(121, 121, 121))
+                            .addComponent(ih20, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
+                            .addComponent(ih30)
+                            .addComponent(ih50))))
+                .addGap(116, 116, 116))
         );
         pricePanelLayout.setVerticalGroup(
             pricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1082,28 +1122,28 @@ private HargaModel hargaModel;
                     .addComponent(istd)
                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(iemp, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                .addGroup(pricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(iemp)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ih50)
-                    .addComponent(jLabel16))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(ih30)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ih50))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ih30))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ih20, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE))
-                .addGap(30, 30, 30)
+                    .addComponent(jLabel14)
+                    .addComponent(ih20, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton7)
+                    .addComponent(cancel)
                     .addComponent(jButton6))
-                .addGap(188, 188, 188))
+                .addGap(171, 171, 171))
         );
 
         valuePanel.add(pricePanel, "card5");
@@ -1159,7 +1199,7 @@ private HargaModel hargaModel;
                     .addGroup(reportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 583, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
         reportPanelLayout.setVerticalGroup(
             reportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1215,7 +1255,7 @@ private HargaModel hargaModel;
                         .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextField9)
                             .addComponent(jTextField8, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE))))
-                .addContainerGap(151, Short.MAX_VALUE))
+                .addContainerGap(171, Short.MAX_VALUE))
         );
         passwordPanelLayout.setVerticalGroup(
             passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1492,7 +1532,7 @@ bg2.add(getRadiob20());
         //remove panel
         menuPanel.setBackground(new Color(255,70,0));
         bodyPanel.setBackground(new Color(255,128,0));
-        btnLogout.setBackground(new Color(255,128,0));
+        btnLogout.setBackground(new Color(255,70,0));
         valuePanel.removeAll();
         valuePanel.repaint();
         valuePanel.revalidate();
@@ -1554,6 +1594,10 @@ bg2.add(getRadiob20());
     } catch (MemberException ex) {
         Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
     }
+    
+         bodyPanel.setBackground( new Color(231,76,60));
+        menuPanel.setBackground(new Color(192,57,43));
+        btnLogout.setBackground(new Color(192,57,43));
         //remove panel
         valuePanel.removeAll();
         valuePanel.repaint();
@@ -1591,7 +1635,9 @@ hargacontroller.selectdata(this);
 
     private void btnReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportActionPerformed
         // TODO add your handling code here:
-        
+         bodyPanel.setBackground( new Color(224,86,253));
+        menuPanel.setBackground(new Color(190,46,221));
+        btnLogout.setBackground(new Color(190,46,221));
         //remove panel
         valuePanel.removeAll();
         valuePanel.repaint();
@@ -1605,7 +1651,9 @@ hargacontroller.selectdata(this);
 
     private void btnPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPasswordActionPerformed
         // TODO add your handling code here:
-        
+         bodyPanel.setBackground( new Color(38,222,129));
+        menuPanel.setBackground(new Color(32,191,107));
+        btnLogout.setBackground(new Color(32,191,107));
         //remove panel
         valuePanel.removeAll();
         valuePanel.repaint();
@@ -1753,9 +1801,17 @@ hargacontroller.selectdata(this);
      }
     }//GEN-LAST:event_btnHitungcActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionPerformed
+    try {
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7ActionPerformed
+        //        logic cancel
+        hargacontroller.selectdata(this);
+    } catch (SQLException ex) {
+        Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (HargaException ex) {
+        Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    }//GEN-LAST:event_cancelActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
@@ -1829,6 +1885,7 @@ hargacontroller.selectdata(this);
         System.out.println("click Simpan");
     }//GEN-LAST:event_btnsimpanActionPerformed
 
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     // TODO add your handling code here:
 
@@ -1845,15 +1902,20 @@ Service_member_dao member = null;
         Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
     }
  String[] array = null;
-
- String output ="";
+ int i = 0;
+String output = "";
+    if(cari.isEmpty()){
+        output = "Nama Tidak Ditemukan";
+    }
 for( Member ss : cari ){
-    String nama = ss.getNama().toString();
+    i++;
+    String nama = ss.getNama();
     String total = ss.getTotal().toString();
-    String ex = ss.getExpire().toString();
-   output += "Nama : "+nama+"   dan Total Biaya : "+total+"\t Masa Belaku :"+ex+"\n";
+    String ex = ss.getExpire();
+    output += i+".Nama : "+nama+" dan Total Biaya : "+total+" Masa Belaku :"+ex+"\n";
 }
-JOptionPane.showMessageDialog(null,output);
+ Output_pencarian.setText(output);
+      
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void valueCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valueCariActionPerformed
@@ -1868,6 +1930,7 @@ JOptionPane.showMessageDialog(null,output);
      * @param args the command line arguments
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea Output_pencarian;
     private javax.swing.JPanel bodyPanel;
     private javax.swing.JButton btnCheck;
     private javax.swing.JButton btnHitungc;
@@ -1879,6 +1942,7 @@ JOptionPane.showMessageDialog(null,output);
     private javax.swing.JButton btnReport;
     private javax.swing.JButton btnResetc;
     private javax.swing.JButton btnsimpan;
+    private javax.swing.JButton cancel;
     private javax.swing.JPanel checkPanel;
     private javax.swing.JPanel homePanel;
     private javax.swing.JTextField iemp;
@@ -1893,7 +1957,6 @@ JOptionPane.showMessageDialog(null,output);
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
@@ -1917,6 +1980,7 @@ JOptionPane.showMessageDialog(null,output);
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField8;

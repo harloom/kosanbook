@@ -138,13 +138,13 @@ private  final String cari = "SELECT *From  tbl_member WHERE nama like ?";
         try {
             connection.setAutoCommit(false);
             statement = connection.prepareStatement(cari);
-            statement.setString(1, "%" + nama + "%");
+            statement.setString(1, "%"+nama+"%");
 //            kalo select pake resource
                 //pake execute Query
             ResultSet ss = statement.executeQuery();
             Member member = null;
        
-            if (ss.next()) {
+            while (ss.next()) {
                 member = new Member();
                 member.setId_member(ss.getInt("id_member"));
                 member.setNama(ss.getString("nama"));
@@ -158,11 +158,9 @@ private  final String cari = "SELECT *From  tbl_member WHERE nama like ?";
                 member.setTanggal_masuk(ss.getString("tanggal_masuk"));
                 member.setExpire(ss.getString("expire"));
                 listcari.add(member);
-                
-            }else{
-                 throw  new MemberException("Member dengan nama "+nama+"  tidak di temukan");
+                connection.commit();
             }
-             connection.commit();
+             
             return listcari;
            
         } catch (SQLException e) {

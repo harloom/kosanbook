@@ -74,9 +74,12 @@ public class TabelMemberModel extends AbstractTableModel{
     
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
+        StringBuffer sb = new StringBuffer(Integer.toString(list.get(rowIndex).getTotal()));
+ 
         switch(columnIndex)
         {
             case 0 : return list.get(rowIndex).getNama();
+//              case 1 : return  sb.toString();
             case 1 : return  list.get(rowIndex).getTotal();
             case 2: return  list.get(rowIndex).getExpire();
             default : return null;

@@ -33,7 +33,7 @@ public class MemberController {
     }
     
 
-    public void insertMember(ViewMain inputmember) throws SQLException, HargaException {
+public void insertMember(ViewMain inputmember) throws SQLException, HargaException {
         
          HargaDao harga = Database.getHargaDao();
         List<Harga> list = harga.selectallHarga();
@@ -60,11 +60,11 @@ public class MemberController {
         String nama = inputmember.getValueNama().getText();
         String alamat = inputmember.getValueAlamat().getText();       
         String ls =inputmember.getValueSewa().getText();
-        if(ls.length()<1){
-         JOptionPane.showMessageDialog(inputmember, "Silahkan Inputkan Sewa ,Master");
-           return;
-        }
-        Integer lamasewa = Integer.parseInt(ls);
+          if(ls.length()<1){
+           JOptionPane.showMessageDialog(inputmember, "Silahkan Inputkan Sewa ,Master");
+             return;
+          }
+          Integer lamasewa = Integer.parseInt(ls);
 //        convert lama sew;
       
         String nohp =  inputmember.getValueNohp().getText();
@@ -72,13 +72,13 @@ public class MemberController {
         String wifi = "";
         String jk="";
         Integer totalkamar = null,totalinternet= null,totalkesuruhan;
-        if(lk.isSelected())
-        {
+        if(lk.isSelected() ) {
             jk ="Pria";
-        }else if(pr.isSelected())
-        {
-                jk="Wanita";
-        }else{
+        }
+        else if(pr.isSelected() ) {
+            jk="Wanita";
+        }
+        else{
             JOptionPane.showMessageDialog(inputmember, "Silahkan Pilih Jenis Kelamin");
         }
         
@@ -87,31 +87,37 @@ public class MemberController {
         if(vip.isSelected()){
             tipe_kamar = "VIP";
             totalkamar = lamasewa*hrgvip;
-        }else if(stand.isSelected()){
+        }
+        else if(stand.isSelected()){
             tipe_kamar = "Standar";
             totalkamar = lamasewa*hrgstd;
-        } else if(kosong.isSelected()){
+        }
+        else if(kosong.isSelected()){
             tipe_kamar = "Kosong";
             totalkamar = lamasewa*hrgempty;
-        } else{ 
+        }
+        else{ 
         JOptionPane.showMessageDialog(inputmember, "Silahkan Pilih Tipe Kamar");
         }
         
         if(v50.isSelected()){
            wifi = "50Mbps";
           totalinternet = lamasewa*hrgv50;
-        }else if(v30.isSelected()){
+        }
+        else if(v30.isSelected()){
             wifi = "30Mbps";
            totalinternet = lamasewa*hrgv30;
-        } else if(v20.isSelected()){
+        } 
+        else if(v20.isSelected()){
             wifi = "20Mbps";
            totalinternet = lamasewa*hrgv20;
-        } else{ 
+        }
+        else{ 
             wifi = "Tidak  Berlangganan";
             totalinternet = lamasewa*0;
         }
             // taggal 
-    Calendar now = Calendar.getInstance();
+        Calendar now = Calendar.getInstance();
         int year = now.get(Calendar.YEAR);
         String cyear = Integer.toString(year);
         int mont = (now.get(Calendar.MONTH) + 1);
@@ -120,26 +126,28 @@ public class MemberController {
         String cday = Integer.toString(day);
         String date = cyear +"/"+cmont+"/"+cday;
         
-Calendar ex = Calendar.getInstance();
-ex.add(Calendar.MONTH, lamasewa);
-SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-String exdate = sdf.format(ex.getTime());
+        Calendar ex = Calendar.getInstance();
+        ex.add(Calendar.MONTH, lamasewa);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        String exdate = sdf.format(ex.getTime());
 
-
-//perjumlahan
-totalkesuruhan = totalinternet+totalkamar;
-
+         //perjumlahan
+         totalkesuruhan = totalinternet+totalkamar;
 
         //validation field kosong
         if(nama.trim().equals("")){
            JOptionPane.showMessageDialog(inputmember, "Silahkan Inputkan Nama ,Master");
-         } else if(alamat.trim().equals("")){
+         }
+         else if(alamat.trim().equals("")){
               JOptionPane.showMessageDialog(inputmember, "Alamat Belum Di Isi , Master");
-        }else if(lamasewa < 1 ){
+        }
+        else if(lamasewa < 1 ){
               JOptionPane.showMessageDialog(inputmember, "Lama Sewa Masih Kosong, Master");
-        }else if (nohp.length()>12){
+        }
+        else if (nohp.length()>12){
               JOptionPane.showMessageDialog(inputmember, "No Handphone tidak boleh lebih dari 12 digit, Master");
-        }else{
+        }
+        else{
            model.setNama(nama);
            model.setJeniskelamin(jk);
            model.setAd(alamat);
@@ -152,25 +160,22 @@ totalkesuruhan = totalinternet+totalkamar;
            model.setTglexpire(exdate);
            
             try {
-                model.insertMember();
-                  JOptionPane.showMessageDialog(inputmember, "Data Berhasil Tersimpan");
-
-            } catch (Throwable throwable) {
+                    model.insertMember();
+                    JOptionPane.showMessageDialog(inputmember, "Data Berhasil Tersimpan");
+              } 
+            catch (Throwable throwable) {
                  JOptionPane.showMessageDialog(inputmember, new Object[] {"Terjadi Error Dalam Sistem Silahkan Hubungin Developer",throwable.getMessage()});
-            }
         }
-        
-           }
+    }
+}
     
     
+     
     
     
-    
-    
-   public void count(ViewMain inputmember) throws SQLException, HargaException
-  {
+public void count(ViewMain inputmember) throws SQLException, HargaException {
       
-      HargaDao harga = Database.getHargaDao();
+        HargaDao harga = Database.getHargaDao();
         List<Harga> list = harga.selectallHarga();
         int hrgv50 = list.get(0).getH50mbps();
         int hrgv30 = list.get(0).getH30mbps();
@@ -184,7 +189,7 @@ totalkesuruhan = totalinternet+totalkamar;
         JRadioButton kosong = inputmember.getRadiobEmpty();        
          // akhir tipe kamar        
          
-//         tipe Wifi
+        // tipe Wifi
         JRadioButton v50 = inputmember.getRadiob50();
         JRadioButton v30 = inputmember.getRadiob30();
         JRadioButton v20 = inputmember.getRadiob20(); 
@@ -194,46 +199,43 @@ totalkesuruhan = totalinternet+totalkamar;
 
         String ls =inputmember.getValueSewa().getText();
         if(ls.length()<1){
-         JOptionPane.showMessageDialog(inputmember, "Silahkan Inputkan Sewa ,Master");
-           return;
+           JOptionPane.showMessageDialog(inputmember, "Silahkan Inputkan Sewa ,Master");
+            return;
         }
 //        convert lama sew;
         Integer lamasewa = Integer.parseInt(ls); 
-              if(vip.isSelected()){
-      
+        if(vip.isSelected()){
             totalkamar = lamasewa*hrgvip;
-        }else if(stand.isSelected()){
-
+        }
+        else if(stand.isSelected()){
             totalkamar = lamasewa*hrgstd;
-        } else if(kosong.isSelected()){
-
+        }
+        else if(kosong.isSelected()){
             totalkamar = lamasewa*hrgempty;
-        } else{ 
+        } 
+        else{ 
         JOptionPane.showMessageDialog(inputmember, "Silahkan Pilih Tipe Kamar");
         }
         
         if(v50.isSelected()){
-
           totalinternet = lamasewa*hrgv50;
-        }else if(v30.isSelected()){
-
+        }
+        else if(v30.isSelected()){
            totalinternet = lamasewa*hrgv30;
-        } else if(v20.isSelected()){
-   
+        }
+        else if(v20.isSelected()){
            totalinternet = lamasewa*hrgv20;
-        } else{ 
-  
-            totalinternet = lamasewa*0;
-          
+        } 
+        else{   
+           totalinternet = lamasewa*0;
         }
         
         //perjumlahan
             totalkesuruhan = totalinternet+totalkamar;
             inputmember.getOutputTotal().setText(Integer.toString(totalkesuruhan));
-    }
+        }
     
-    
-    
+
     
     }
 

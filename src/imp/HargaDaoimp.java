@@ -55,26 +55,26 @@ public class HargaDaoimp  implements HargaDao{
             statement.setString(7, harga.getTanggal_update());
             statement.setInt(8, harga.getId());
             statement.executeUpdate();
-
-         connection.commit();
+            connection.commit();
     } catch (SQLException ex) {
         try {
             connection.rollback();
-        } catch (SQLException e) {
-        }
+            } 
+            catch (SQLException e) {
+            }
         throw  new HargaException(ex.getMessage());
-    }finally
-    {
-        try {
-            connection.setAutoCommit(true);
-        } catch (SQLException e) {
         }
+        finally{
+            try {
+                connection.setAutoCommit(true);
+            }
+         catch (SQLException e) {
+            }
             if (statement !=null) {
-                      try
-                    {
-                        statement.close();
+                      try{
+                    statement.close();
                     } catch (SQLException ex){          
-                   }  
+                 }  
             }
         }         
     }
@@ -83,7 +83,7 @@ public class HargaDaoimp  implements HargaDao{
 
     @Override
     public List<Harga> selectallHarga() throws HargaException {
-                Statement statement = null;
+        Statement statement = null;
         List<Harga> listharga= new ArrayList<Harga>();
         
         try {
@@ -103,17 +103,17 @@ public class HargaDaoimp  implements HargaDao{
                 harga.setTanggal_update(resultharga.getString("tanggal_update"));
                 listharga.add(harga);
                 connection.commit();
-            }              
-               
+            }          
             return listharga;
-           
+
+
         } catch (SQLException e) {
             try {
                 connection.rollback();
             } catch (SQLException ex) {            
-            }
-//            pake titik
-             throw new HargaException(e.getMessage());
+        }
+
+        throw new HargaException(e.getMessage());
        } finally{
                 try {
                  connection.setAutoCommit(true);

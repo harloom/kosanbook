@@ -49,26 +49,26 @@ public void updateharga(ViewMain viewMain) throws HargaException,SQLException  {
         String tanggal_up = cyear +"/"+cmont+"/"+cday;
                
   
-             hargaModel.setHvip(vip);
-             hargaModel.setHstd(std);
-             hargaModel.setHkosong(kosong);
-             hargaModel.setH50(h50);   
-             hargaModel.setH30(h30);
-             hargaModel.setH20(h20);
-             hargaModel.setTanggal_up(tanggal_up);
-            try {
-                hargaModel.updateHarga();
-                 JOptionPane.showMessageDialog(viewMain, "Harga Berhasil Di Ubah");
-
+        hargaModel.setHvip(vip);
+        hargaModel.setHstd(std);
+        hargaModel.setHkosong(kosong);
+        hargaModel.setH50(h50);   
+        hargaModel.setH30(h30);
+        hargaModel.setH20(h20);
+        hargaModel.setTanggal_up(tanggal_up);
+        try {
+            hargaModel.updateHarga();
+             JOptionPane.showMessageDialog(viewMain, "Harga Berhasil Di Ubah");
+ 
             } catch (Throwable e) {
                  JOptionPane.showMessageDialog(viewMain, "Data gagal ke Di Ubah , Silahkan Hubungi Dev");
-            }
+        }
       
     }
 
 
-    public void selectdata(ViewMain viewMain  ) throws SQLException, HargaException{
-                //ambil data dari database
+public void selectdata(ViewMain viewMain  ) throws SQLException, HargaException{
+        //ambil data dari database
         HargaDao hh = Database.getHargaDao();    
         Harga harga =  hh.getHarga(1);
         Integer datah50mbps = harga.getH50mbps();

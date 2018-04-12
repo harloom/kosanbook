@@ -16,11 +16,15 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.ListModel;
+import javax.swing.SwingUtilities;
 import service.HargaDao;
 import service.Service_member_dao;
+import view.ViewMain;
 
 /**
  *
@@ -33,7 +37,26 @@ public class Main {
      */        
     
     public static void main(String[] args) throws SQLException, MemberException, HargaException {
-
+        
+        
+        
+        
+        SwingUtilities.invokeLater(new Runnable(){
+        @Override
+        public void run(){
+            try {
+                ViewMain view = new ViewMain();
+       
+                
+                view.setVisible(true);
+            } catch (SQLException e) {
+                
+            } catch (MemberException ex) {
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            } 
+        }
+            
+    });
         
         
 

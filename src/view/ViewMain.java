@@ -57,20 +57,20 @@ private HargaController hargacontroller;
 private HargaModel hargaModel;
 
     
-        public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-
-            public void run() {
-                try {
-                    new ViewMain().setVisible(true);
-                } catch (MemberException ex) {
-                    Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (SQLException ex) {
-                    Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-    }
+//        public static void main(String args[]) {
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//
+//            public void run() {
+//                try {
+//                    new ViewMain().setVisible(true);
+//                } catch (MemberException ex) {
+//                    Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
+//                } catch (SQLException ex) {
+//                    Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
+//        });
+//    }
         
     /** Creates new form Main */
     public ViewMain() throws MemberException, SQLException {

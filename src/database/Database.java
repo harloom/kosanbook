@@ -8,6 +8,7 @@ package database;
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import imp.HargaDaoimp;
 import imp.MemberDaoimp;
+import imp.NewHargaDaoimp;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
@@ -19,6 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import service.HargaDao;
+import service.NewHargaDao;
 import service.Service_member_dao;
 
 
@@ -30,12 +32,13 @@ public class Database {
     private static Connection connection ;
     private static Service_member_dao memberDao;
     private static HargaDao hargaDao;
+    private static NewHargaDao newhargaDao;
 
 public static Connection getConnection() throws SQLException, IOException{
 
-        String url = "jdbc:mysql://localhost:3306/db_kosanbook?zeroDateTimeBehavior=convertToNull";
-//        String user =  JOptionPane.showInputDialog("Silahkan masukan userXampp");
-//        String pass = JOptionPane.showInputDialog("Silahkan masukan passXampp");
+       String url = "jdbc:mysql://localhost:3306/db_kosanbook?zeroDateTimeBehavior=convertToNull";
+//       String user =  JOptionPane.showInputDialog("Silahkan masukan userXampp");
+//       String pass = JOptionPane.showInputDialog("Silahkan masukan passXampp");
         String user =  "root";
         String pass = "";
         try {
@@ -74,6 +77,17 @@ public static HargaDao getHargaDao() throws SQLException{
             }
         }
         return  hargaDao;
+    }
+
+public static NewHargaDao getNewHargaDao() throws SQLException{
+        if(newhargaDao == null) {
+            try {
+                newhargaDao = new NewHargaDaoimp(getConnection());
+            } catch (IOException ex) {
+                Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return newhargaDao  ;
     }
 
 }

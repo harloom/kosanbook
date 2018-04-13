@@ -43,6 +43,7 @@ import model.MemberModel;
 import model.TabelMemberModel;
 import service.HargaDao;
 import service.Service_member_dao;
+import sound.Hime;
 
 
 /**
@@ -55,6 +56,7 @@ private MemberController membercontroller;
 private MemberModel memberModel;
 private HargaController hargacontroller;
 private HargaModel hargaModel;
+private Hime sound;
 
     
 //        public static void main(String args[]) {
@@ -84,7 +86,9 @@ private HargaModel hargaModel;
         hargaModel = new HargaModel();
         hargacontroller = new HargaController();
         hargacontroller.setHargaModel(hargaModel);
-        
+
+        sound = new Hime();
+        sound.hime();
         initComponents();
         tabelmember.setModel(tabelmembermodel);
         
@@ -96,6 +100,7 @@ private HargaModel hargaModel;
         setExtendedState(JFrame.MAXIMIZED_HORIZ );
         setVisible(true);
         setResizable(false);
+;
     }
     
     
@@ -170,16 +175,6 @@ private HargaModel hargaModel;
         outputTotal = new javax.swing.JLabel();
         btnHitungc = new javax.swing.JButton();
         btnsimpan = new javax.swing.JButton();
-        memberPanel = new javax.swing.JPanel();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tabelmember = new javax.swing.JTable();
-        jLabel3 = new javax.swing.JLabel();
-        valueCari = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        Output_pencarian = new javax.swing.JTextArea();
         pricePanel = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -197,6 +192,16 @@ private HargaModel hargaModel;
         ih50 = new javax.swing.JTextField();
         jButton6 = new javax.swing.JButton();
         cancel = new javax.swing.JButton();
+        memberPanel = new javax.swing.JPanel();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tabelmember = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
+        valueCari = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        Output_pencarian = new javax.swing.JTextArea();
         reportPanel = new javax.swing.JPanel();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
@@ -214,6 +219,7 @@ private HargaModel hargaModel;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("KosanBook");
+        setUndecorated(true);
 
         bodyPanel.setBackground(new java.awt.Color(-32768,true));
 
@@ -405,7 +411,7 @@ private HargaModel hargaModel;
                 .addComponent(btnReport, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
 
         valuePanel.setBackground(new java.awt.Color(-15598,true));
@@ -910,6 +916,143 @@ private HargaModel hargaModel;
 
         valuePanel.add(checkPanel, "card3");
 
+        jLabel9.setFont(new java.awt.Font("Dialog", 0, 18));
+        jLabel9.setText("VIP");
+
+        jLabel10.setFont(new java.awt.Font("Dialog", 0, 18));
+        jLabel10.setText("Harga Sewa Kamar");
+
+        jLabel11.setFont(new java.awt.Font("Dialog", 0, 18));
+        jLabel11.setText("Standard");
+
+        jLabel12.setFont(new java.awt.Font("Dialog", 0, 18));
+        jLabel12.setText("Empty");
+
+        ivip.setBorder(null);
+
+        istd.setBorder(null);
+
+        iemp.setBorder(null);
+
+        jLabel13.setFont(new java.awt.Font("Dialog", 0, 18));
+        jLabel13.setText("Harga Sewa Wi-Fi");
+
+        ih20.setBorder(null);
+
+        jLabel14.setFont(new java.awt.Font("Dialog", 0, 18));
+        jLabel14.setText("20 Mbps");
+
+        jLabel15.setFont(new java.awt.Font("Dialog", 0, 18));
+        jLabel15.setText("30 Mbps");
+
+        ih30.setBorder(null);
+        ih30.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ih30ActionPerformed(evt);
+            }
+        });
+
+        jLabel16.setFont(new java.awt.Font("Dialog", 0, 18));
+        jLabel16.setText("50 Mbps");
+
+        ih50.setBorder(null);
+
+        jButton6.setBackground(new java.awt.Color(-1,true));
+        jButton6.setText("Save");
+        jButton6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
+        cancel.setBackground(new java.awt.Color(-1,true));
+        cancel.setText("Cancel");
+        cancel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        cancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pricePanelLayout = new javax.swing.GroupLayout(pricePanel);
+        pricePanel.setLayout(pricePanelLayout);
+        pricePanelLayout.setHorizontalGroup(
+            pricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pricePanelLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(pricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pricePanelLayout.createSequentialGroup()
+                        .addGroup(pricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel12))
+                        .addGap(40, 40, 40)
+                        .addGroup(pricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(iemp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE)
+                            .addComponent(istd, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ivip))
+                        .addGap(0, 0, 0))
+                    .addGroup(pricePanelLayout.createSequentialGroup()
+                        .addGroup(pricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pricePanelLayout.createSequentialGroup()
+                                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cancel, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel13)
+                            .addGroup(pricePanelLayout.createSequentialGroup()
+                                .addGroup(pricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel16)
+                                    .addComponent(jLabel15)
+                                    .addComponent(jLabel14))
+                                .addGap(50, 50, 50)
+                                .addGroup(pricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(ih20, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
+                                    .addComponent(ih30)
+                                    .addComponent(ih50))))
+                        .addGap(116, 116, 116))))
+        );
+        pricePanelLayout.setVerticalGroup(
+            pricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pricePanelLayout.createSequentialGroup()
+                .addGap(62, 62, 62)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ivip)
+                    .addComponent(jLabel9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(istd)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(iemp)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addComponent(jLabel13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ih50))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ih30))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(ih20, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cancel)
+                    .addComponent(jButton6))
+                .addGap(171, 171, 171))
+        );
+
+        valuePanel.add(pricePanel, "card5");
+
         jButton4.setBackground(new java.awt.Color(-1,true));
         jButton4.setText("Edit");
 
@@ -995,7 +1138,7 @@ private HargaModel hargaModel;
         memberPanelLayout.setVerticalGroup(
             memberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, memberPanelLayout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(memberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(memberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel3)
@@ -1013,140 +1156,6 @@ private HargaModel hargaModel;
         );
 
         valuePanel.add(memberPanel, "card4");
-
-        jLabel9.setFont(new java.awt.Font("Dialog", 0, 18));
-        jLabel9.setText("VIP");
-
-        jLabel10.setFont(new java.awt.Font("Dialog", 0, 18));
-        jLabel10.setText("Harga Sewa Kamar");
-
-        jLabel11.setFont(new java.awt.Font("Dialog", 0, 18));
-        jLabel11.setText("Standard");
-
-        jLabel12.setFont(new java.awt.Font("Dialog", 0, 18));
-        jLabel12.setText("Empty");
-
-        ivip.setBorder(null);
-
-        istd.setBorder(null);
-
-        iemp.setBorder(null);
-
-        jLabel13.setFont(new java.awt.Font("Dialog", 0, 18));
-        jLabel13.setText("Harga Sewa Wi-Fi");
-
-        ih20.setBorder(null);
-
-        jLabel14.setFont(new java.awt.Font("Dialog", 0, 18));
-        jLabel14.setText("20 Mbps");
-
-        jLabel15.setFont(new java.awt.Font("Dialog", 0, 18));
-        jLabel15.setText("30 Mbps");
-
-        ih30.setBorder(null);
-        ih30.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ih30ActionPerformed(evt);
-            }
-        });
-
-        jLabel16.setFont(new java.awt.Font("Dialog", 0, 18));
-        jLabel16.setText("50 Mbps");
-
-        ih50.setBorder(null);
-
-        jButton6.setBackground(new java.awt.Color(-1,true));
-        jButton6.setText("Save");
-        jButton6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-
-        cancel.setBackground(new java.awt.Color(-1,true));
-        cancel.setText("Cancel");
-        cancel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        cancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout pricePanelLayout = new javax.swing.GroupLayout(pricePanel);
-        pricePanel.setLayout(pricePanelLayout);
-        pricePanelLayout.setHorizontalGroup(
-            pricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pricePanelLayout.createSequentialGroup()
-                .addGap(119, 119, 119)
-                .addGroup(pricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pricePanelLayout.createSequentialGroup()
-                        .addGroup(pricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel12))
-                        .addGap(40, 40, 40)
-                        .addGroup(pricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(istd)
-                            .addComponent(ivip)
-                            .addComponent(iemp, javax.swing.GroupLayout.Alignment.TRAILING)))
-                    .addGroup(pricePanelLayout.createSequentialGroup()
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cancel, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel13)
-                    .addGroup(pricePanelLayout.createSequentialGroup()
-                        .addGroup(pricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel16)
-                            .addComponent(jLabel15)
-                            .addComponent(jLabel14))
-                        .addGap(50, 50, 50)
-                        .addGroup(pricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(ih20, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
-                            .addComponent(ih30)
-                            .addComponent(ih50))))
-                .addGap(116, 116, 116))
-        );
-        pricePanelLayout.setVerticalGroup(
-            pricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pricePanelLayout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ivip)
-                    .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(istd)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(iemp)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ih50))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ih30))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(ih20, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(pricePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cancel)
-                    .addComponent(jButton6))
-                .addGap(171, 171, 171))
-        );
-
-        valuePanel.add(pricePanel, "card5");
 
         jButton8.setBackground(new java.awt.Color(-1,true));
         jButton8.setText("Lihat Data Penghuni");
@@ -1315,10 +1324,12 @@ private HargaModel hargaModel;
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bodyPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(bodyPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(922, 682));
+        setSize(new java.awt.Dimension(906, 655));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -1514,8 +1525,6 @@ bg2.add(getRadiob20());
         return valueNohp;
     }
 
-
-
     public JTextField getValueSewa() {
         return valueSewa;
     }
@@ -1529,6 +1538,9 @@ bg2.add(getRadiob20());
      } catch (SQLException ex) {
          Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
      }
+     
+        // sound /
+        sound.soundClick();
         //remove panel
         menuPanel.setBackground(new Color(255,70,0));
         bodyPanel.setBackground(new Color(255,128,0));
@@ -1548,6 +1560,9 @@ bg2.add(getRadiob20());
         bodyPanel.setBackground( new Color(45,152,218));
         menuPanel.setBackground(new Color(56,103,214));
         btnLogout.setBackground(new Color(56,103,214));
+        
+         // sound /
+        sound.soundClick();
         //remove panel
         valuePanel.removeAll();
         valuePanel.repaint();
@@ -1594,7 +1609,9 @@ bg2.add(getRadiob20());
     } catch (MemberException ex) {
         Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
     }
-    
+          // sound /
+        sound.soundClick();
+        
          bodyPanel.setBackground( new Color(231,76,60));
         menuPanel.setBackground(new Color(192,57,43));
         btnLogout.setBackground(new Color(192,57,43));
@@ -1622,6 +1639,10 @@ hargacontroller.selectdata(this);
         bodyPanel.setBackground( new Color(252,92,101));
         menuPanel.setBackground(new Color(235,59,90));
         btnLogout.setBackground(new Color(235,59,90));
+        
+        
+              // sound /
+        sound.soundClick();
         //remove panel
         valuePanel.removeAll();
         valuePanel.repaint();
@@ -1638,6 +1659,9 @@ hargacontroller.selectdata(this);
          bodyPanel.setBackground( new Color(224,86,253));
         menuPanel.setBackground(new Color(190,46,221));
         btnLogout.setBackground(new Color(190,46,221));
+        
+         // sound /
+        sound.soundClick();
         //remove panel
         valuePanel.removeAll();
         valuePanel.repaint();
@@ -1654,6 +1678,10 @@ hargacontroller.selectdata(this);
          bodyPanel.setBackground( new Color(38,222,129));
         menuPanel.setBackground(new Color(32,191,107));
         btnLogout.setBackground(new Color(32,191,107));
+        
+        
+         // sound /
+        sound.soundClick();
         //remove panel
         valuePanel.removeAll();
         valuePanel.repaint();
@@ -1801,18 +1829,6 @@ hargacontroller.selectdata(this);
      }
     }//GEN-LAST:event_btnHitungcActionPerformed
 
-    private void cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionPerformed
-    try {
-        // TODO add your handling code here:
-        //        logic cancel
-        hargacontroller.selectdata(this);
-    } catch (SQLException ex) {
-        Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (HargaException ex) {
-        Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    }//GEN-LAST:event_cancelActionPerformed
-
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton9ActionPerformed
@@ -1820,18 +1836,6 @@ hargacontroller.selectdata(this);
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton10ActionPerformed
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-    try {
-        // TODO add your handling code here:
-        hargacontroller.updateharga(this);
-//        hargacontroller.controllerHarga(this);
-    } catch (HargaException ex) {
-        Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (SQLException ex) {
-        Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    }//GEN-LAST:event_jButton6ActionPerformed
 
     private void radiobLakiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radiobLakiActionPerformed
         // TODO add your handling code here:
@@ -1906,21 +1910,49 @@ Service_member_dao member = null;
 String output = "";
     if(cari.isEmpty()){
         output = "Nama Tidak Ditemukan";
+         Output_pencarian.setText(output);
     }
 for( Member ss : cari ){
     i++;
     String nama = ss.getNama();
     String total = ss.getTotal().toString();
     String ex = ss.getExpire();
+    output += "________________________________________________________\n";
     output += i+".Nama : "+nama+" dan Total Biaya : "+total+" Masa Belaku :"+ex+"\n";
+    output += "________________________________________________________\n";
 }
  Output_pencarian.setText(output);
+
       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void valueCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valueCariActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_valueCariActionPerformed
+
+    private void cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionPerformed
+        try {
+            // TODO add your handling code here:
+            //        logic cancel
+            hargacontroller.selectdata(this);
+        } catch (SQLException ex) {
+            Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (HargaException ex) {
+            Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_cancelActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        try {
+            // TODO add your handling code here:
+            hargacontroller.updateharga(this);
+            //        hargacontroller.controllerHarga(this);
+        } catch (HargaException ex) {
+            Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     private void ih30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ih30ActionPerformed
         // TODO add your handling code here:

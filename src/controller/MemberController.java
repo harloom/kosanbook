@@ -19,6 +19,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import model.MemberModel;
 import service.HargaDao;
+import sound.Hime;
 import view.ViewMain;
 
 /**
@@ -27,6 +28,7 @@ import view.ViewMain;
  */
 public class MemberController {
     private MemberModel model;
+     Hime sound = new Hime();
 
     public void setModel(MemberModel model) {
         this.model = model;
@@ -54,23 +56,28 @@ public void insertMember(ViewMain inputmember) throws SQLException, HargaExcepti
         JRadioButton v30 = inputmember.getRadiob30();
         JRadioButton v20 = inputmember.getRadiob20();        
          // akhir tipe wifi  
-          JRadioButton lk = inputmember.getRadiobLaki();
+        JRadioButton lk = inputmember.getRadiobLaki();
         JRadioButton pr = inputmember.getRadiobperempuan();
          
         String nama = inputmember.getValueNama().getText();
         String alamat = inputmember.getValueAlamat().getText();       
         String ls =inputmember.getValueSewa().getText();
-          if(ls.length()<1){
-           JOptionPane.showMessageDialog(inputmember, "Silahkan Inputkan Sewa ,Master");
-             return;
-          }
-          Integer lamasewa = Integer.parseInt(ls);
-//        convert lama sew;
-      
         String nohp =  inputmember.getValueNohp().getText();
         String tipe_kamar = "";
         String wifi = "";
         String jk="";
+          if( ls.length()<1 ){
+             sound. soundErr();
+           JOptionPane.showMessageDialog(inputmember, "Form Sewa Masih Kosong!");
+           return;
+          }else if(nohp.length()<1){
+           sound. soundErr();
+           JOptionPane.showMessageDialog(inputmember, "Form No Handphone Masih Kosong!");
+          }
+         Integer lamasewa = Integer.parseInt(ls);
+//        convert lama sew;
+      
+
         Integer totalkamar = null,totalinternet= null,totalkesuruhan;
         if(lk.isSelected() ) {
             jk ="Pria";
@@ -79,7 +86,9 @@ public void insertMember(ViewMain inputmember) throws SQLException, HargaExcepti
             jk="Wanita";
         }
         else{
+              sound. soundErr();
             JOptionPane.showMessageDialog(inputmember, "Silahkan Pilih Jenis Kelamin");
+          return;
         }
         
 
@@ -97,7 +106,9 @@ public void insertMember(ViewMain inputmember) throws SQLException, HargaExcepti
             totalkamar = lamasewa*hrgempty;
         }
         else{ 
+         sound. soundErr();
         JOptionPane.showMessageDialog(inputmember, "Silahkan Pilih Tipe Kamar");
+        return;
         }
         
         if(v50.isSelected()){
@@ -136,16 +147,24 @@ public void insertMember(ViewMain inputmember) throws SQLException, HargaExcepti
 
         //validation field kosong
         if(nama.trim().equals("")){
+            sound. soundErr();
            JOptionPane.showMessageDialog(inputmember, "Silahkan Inputkan Nama ,Master");
+           return;
          }
          else if(alamat.trim().equals("")){
-              JOptionPane.showMessageDialog(inputmember, "Alamat Belum Di Isi , Master");
+            sound. soundErr();
+           JOptionPane.showMessageDialog(inputmember, "Alamat Belum Di Isi , Master");
+           return;
         }
         else if(lamasewa < 1 ){
+                sound. soundErr();
               JOptionPane.showMessageDialog(inputmember, "Lama Sewa Masih Kosong, Master");
-        }
+           return;
+        } 
         else if (nohp.length()>12){
+              sound. soundErr();
               JOptionPane.showMessageDialog(inputmember, "No Handphone tidak boleh lebih dari 12 digit, Master");
+           return;
         }
         else{
            model.setNama(nama);
@@ -165,7 +184,8 @@ public void insertMember(ViewMain inputmember) throws SQLException, HargaExcepti
               } 
             catch (Throwable throwable) {
                  JOptionPane.showMessageDialog(inputmember, new Object[] {"Terjadi Error Dalam Sistem Silahkan Hubungin Developer",throwable.getMessage()});
-        }
+                   sound. soundErr();
+            }
     }
 }
     

@@ -12,6 +12,7 @@ import java.util.Objects;
  * @author Hx-loom
  */
 public class Harga {
+
     private Integer id;
     private Integer h50mbps;
     private Integer h30mbps;
@@ -33,10 +34,9 @@ public class Harga {
     }
 
     public Harga() {
-        
+
     }
 
-    
     public Integer getId() {
         return id;
     }
@@ -154,8 +154,4 @@ public class Harga {
         return true;
     }
 
-
-    
-    
-    
 }

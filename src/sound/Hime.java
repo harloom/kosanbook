@@ -22,7 +22,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  */
 public class Hime {
 
-    public void hime()   {
+    public void hime() {
         try {
             Clip clip = AudioSystem.getClip();
             AudioInputStream file = AudioSystem.getAudioInputStream(Hime.class.getResource("link.wav"));
@@ -33,44 +33,46 @@ public class Hime {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
     }
-  public void baka(){
-              try {
+
+    public void baka() {
+        try {
             Clip clip = AudioSystem.getClip();
             AudioInputStream file = AudioSystem.getAudioInputStream(Hime.class.getResource("Sagiribaka.wav"));
             clip.open(file);
             clip.start();
-          
+
 //            clip.stop();
         } catch (Exception e) {
             e.printStackTrace();
         }
-         
-  }   
-  public void soundClick(){
-           try {
+
+    }
+
+    public void soundClick() {
+        try {
             Clip clip = AudioSystem.getClip();
             AudioInputStream file = AudioSystem.getAudioInputStream(Hime.class.getResource("click.wav"));
             clip.open(file);
             clip.start();
-          
+
 //            clip.stop();
         } catch (Exception e) {
             e.printStackTrace();
-        } 
-            }
-  
-    public void soundErr(){
-           try {
+        }
+    }
+
+    public void soundErr() {
+        try {
             Clip clip = AudioSystem.getClip();
             AudioInputStream file = AudioSystem.getAudioInputStream(Hime.class.getResource("error.wav"));
             clip.open(file);
             clip.start();
-          
+
 //            clip.stop();
         } catch (Exception e) {
             e.printStackTrace();
-        } 
-            }
+        }
+    }
 }

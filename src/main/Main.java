@@ -6,9 +6,6 @@
 package main;
 
 import database.Database;
-import enity.Harga;
-import enity.Member;
-import enity.Newharga;
 import error.HargaException;
 //import enity.Member;
 import error.MemberException;
@@ -19,7 +16,6 @@ import java.util.logging.Logger;
 
 import javax.swing.SwingUtilities;
 import service.HargaDao;
-import service.NewHargaDao;
 import service.Service_member_dao;
 import sound.Hime;
 import view.ViewMain;

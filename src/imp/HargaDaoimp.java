@@ -66,7 +66,8 @@ public class HargaDaoimp  implements HargaDao{
         }
         finally{
             try {
-                connection.setAutoCommit(true);
+                 
+               connection.setAutoCommit(true);
             }
          catch (SQLException e) {
             }

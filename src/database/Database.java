@@ -6,6 +6,7 @@
 package database;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
+import imp.AdminDaoimp;
 import imp.HargaDaoimp;
 import imp.MemberDaoimp;
 import java.awt.Desktop;
@@ -17,6 +18,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import service.AdminDao;
 import service.HargaDao;
 import service.Service_member_dao;
 import sound.Hime;
@@ -30,6 +32,7 @@ public class Database {
     private static Connection connection;
     private static Service_member_dao memberDao;
     private static HargaDao hargaDao;
+    private static AdminDao adminDao;
     private static Hime sound = new Hime();
 
     public static Connection getConnection() throws SQLException, IOException {
@@ -76,6 +79,17 @@ public class Database {
             }
         }
         return hargaDao;
+    }
+    
+  public static AdminDao getAdminDao() throws SQLException {
+        if (adminDao == null) {
+            try {
+                adminDao = new AdminDaoimp(getConnection());
+            } catch (IOException ex) {
+                Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return adminDao ;
     }
 
 }

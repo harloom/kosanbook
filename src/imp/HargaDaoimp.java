@@ -155,7 +155,7 @@ public class HargaDaoimp  implements HargaDao{
                 harga.setTanggal_update(result.getString("tanggal_update"));
                 
             }else{
-                 throw  new HargaException("Harga Gagal Di Update");
+                 throw  new HargaException("Printah Gagal");
             }
                connection.commit();
             return harga;

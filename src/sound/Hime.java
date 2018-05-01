@@ -75,4 +75,17 @@ public class Hime {
             e.printStackTrace();
         }
     }
+    
+    public void musicgagal() {
+        try {
+            Clip clip = AudioSystem.getClip();
+            AudioInputStream file = AudioSystem.getAudioInputStream(Hime.class.getResource("hime.wav"));
+            clip.open(file);
+            clip.start();
+
+//            clip.stop();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

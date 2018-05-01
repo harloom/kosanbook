@@ -10,11 +10,14 @@
  */
 package view;
 
+import controller.AdminController;
 import controller.HargaController;
 import controller.MemberController;
 import database.Database;
+import enity.Admin;
 import enity.Harga;
 import enity.Member;
+import error.AdminException;
 import error.HargaException;
 import error.MemberException;
 
@@ -30,13 +33,16 @@ import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import model.AdminModel;
 import model.HargaModel;
 
 import model.MemberModel;
 import model.TabelMemberModel;
+import service.AdminDao;
 import service.HargaDao;
 import service.Service_member_dao;
 import sound.Hime;
@@ -53,6 +59,8 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
     private HargaController hargacontroller;
     private HargaModel hargaModel;
     private Hime sound;
+    private AdminController adminController;
+    private AdminModel adminModel;
 
 //        public static void main(String args[]) {
 //        java.awt.EventQueue.invokeLater(new Runnable() {
@@ -75,14 +83,18 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
         tabelmembermodel = new TabelMemberModel();
         memberModel = new MemberModel();
         memberModel.setListiner(this);
-
+       // Menghubungkan Controller member
         membercontroller = new MemberController();
         membercontroller.setModel(memberModel);
-
+        // Menghubungkan Controller Harga
         hargaModel = new HargaModel();
         hargacontroller = new HargaController();
         hargacontroller.setHargaModel(hargaModel);
-
+        // Menghubungkan Controller admin
+        adminModel = new AdminModel();
+        adminController = new AdminController();
+        adminController.setAdminModel(adminModel);
+        
         sound = new Hime();
         sound.hime();
         initComponents();
@@ -206,10 +218,12 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
         jLabel5 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
+        txtPasswordLama = new javax.swing.JPasswordField();
+        txtPasswordBaru = new javax.swing.JPasswordField();
+        txtValidPassword = new javax.swing.JPasswordField();
+        txtChangeP = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("KosanBook");
@@ -1088,6 +1102,16 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
         jButton1.setBackground(new java.awt.Color(-1,true));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons8-search-20.png"))); // NOI18N
         jButton1.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
+        jButton1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jButton1MouseMoved(evt);
+            }
+        });
+        jButton1.addMouseWheelListener(new java.awt.event.MouseWheelListener() {
+            public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
+                jButton1MouseWheelMoved(evt);
+            }
+        });
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -1226,55 +1250,77 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
         jLabel18.setFont(new java.awt.Font("Dialog", 0, 18));
         jLabel18.setText("Konfirmasi Password");
 
-        jTextField9.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.setBackground(new java.awt.Color(-1,true));
+        jButton2.setText("Change Password");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField9ActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(-1,true));
-        jButton2.setText("Change Password");
+        txtPasswordLama.setBorder(null);
+
+        txtPasswordBaru.setBorder(null);
+
+        txtValidPassword.setBorder(null);
+
+        txtChangeP.setFont(new java.awt.Font("Dialog", 0, 18));
+        txtChangeP.setText("00-00-0000");
+
+        jLabel20.setFont(new java.awt.Font("Dialog", 0, 18));
+        jLabel20.setText("Last Change =");
 
         javax.swing.GroupLayout passwordPanelLayout = new javax.swing.GroupLayout(passwordPanel);
         passwordPanel.setLayout(passwordPanelLayout);
         passwordPanelLayout.setHorizontalGroup(
             passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(passwordPanelLayout.createSequentialGroup()
-                .addGap(95, 95, 95)
-                .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, passwordPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel18)
+                .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(passwordPanelLayout.createSequentialGroup()
+                        .addGap(95, 95, 95)
+                        .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, passwordPanelLayout.createSequentialGroup()
+                                .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel17)
+                                    .addComponent(jLabel18))
+                                .addGap(29, 29, 29)
+                                .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtValidPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtPasswordLama, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtPasswordBaru, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(passwordPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel20)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField10, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, passwordPanelLayout.createSequentialGroup()
-                        .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel17))
-                        .addGap(57, 57, 57)
-                        .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField9)
-                            .addComponent(jTextField8, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE))))
+                        .addComponent(txtChangeP, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(171, Short.MAX_VALUE))
         );
         passwordPanelLayout.setVerticalGroup(
             passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(passwordPanelLayout.createSequentialGroup()
-                .addGap(182, 182, 182)
+                .addContainerGap()
+                .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtChangeP)
+                    .addComponent(jLabel20))
+                .addGap(147, 147, 147)
                 .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField8)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabel5)
+                    .addComponent(txtPasswordLama, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField9)
+                    .addGroup(passwordPanelLayout.createSequentialGroup()
+                        .addComponent(txtPasswordBaru, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1))
                     .addComponent(jLabel17))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField10)
-                    .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.LEADING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
-                .addGap(265, 265, 265))
+                .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtValidPassword))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(253, 253, 253))
         );
 
         valuePanel.add(passwordPanel, "card7");
@@ -1324,196 +1370,218 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-     //Section FormCheckIN
-     private void countMember() throws MemberException, SQLException {
+    //Section FormCheckIN
+    private void countMember() throws MemberException, SQLException {
 
-         int countm = 0;
-         Service_member_dao member = Database.getMemberDao();
-         List<Member> listmember = member.selectallmember();
-         int tp = 0;
-         for (Member value : listmember) {
-             countm += 1;
-             tp += value.getTotal();
-         }
-         StringBuffer sb = new StringBuffer(Integer.toString(tp));
-         if (sb.length() >= 0 && sb.length() <= 6) {
-             sb.insert(3, ".");
-         } else if (sb.length() == 7) {
-             sb.insert(5, ".");
-         } else if (sb.length() == 8) {
-             sb.insert(2, ".");
-             sb.insert(6, ".");
-         } else if (sb.length() == 9) {
-             sb.insert(3, ".");
-             sb.insert(7, ".");
-         } else if (sb.length() == 10) {
-             sb.insert(1, ".");
-             sb.insert(5, ".");
-             sb.insert(9, ".");
-         }
-         totalMember.setText(Integer.toString(countm));
-         totalPendapatan.setText("Rp. " + sb.toString());
-     }
+        int countm = 0;
+        Service_member_dao member = Database.getMemberDao();
+        List<Member> listmember = member.selectallmember();
+        int tp = 0;
+        for (Member value : listmember) {
+            countm += 1;
+            tp += value.getTotal();
+        }
+        StringBuffer sb = new StringBuffer(Integer.toString(tp));
+        if (sb.length() >= 0 && sb.length() <= 6) {
+            sb.insert(3, ".");
+        } else if (sb.length() == 7) {
+            sb.insert(5, ".");
+        } else if (sb.length() == 8) {
+            sb.insert(2, ".");
+            sb.insert(6, ".");
+        } else if (sb.length() == 9) {
+            sb.insert(3, ".");
+            sb.insert(7, ".");
+        } else if (sb.length() == 10) {
+            sb.insert(1, ".");
+            sb.insert(5, ".");
+            sb.insert(9, ".");
+        }
+        totalMember.setText(Integer.toString(countm));
+        totalPendapatan.setText("Rp. " + sb.toString());
+    }
+    private void lastC() throws SQLException, AdminException {
+                //ambil data password lama
+        String tgl = null;
+        AdminDao daolist = Database.getAdminDao();
+        List<Admin> aa = daolist.listAdmin();
+        for (Admin n : aa) {
+            tgl = n.getTgl_login();
+        }
+        txtChangeP.setText(tgl);
+    }
 
-     private void loadDatatabel() throws SQLException, MemberException {
-         Service_member_dao member = Database.getMemberDao();
-         tabelmembermodel.setList(member.selectallmember());
-     }
+    private void loadDatatabel() throws SQLException, MemberException {
+        Service_member_dao member = Database.getMemberDao();
+        tabelmembermodel.setList(member.selectallmember());
+    }
 
-     private void groupButtontipe_kamar() {
+    private void groupButtontipe_kamar() {
 
-         ButtonGroup bg1 = new ButtonGroup();
+        ButtonGroup bg1 = new ButtonGroup();
 
-         bg1.add(getRadiobVip());
-         bg1.add(getRadiobStandard());
-         bg1.add(getRadiobEmpty());
+        bg1.add(getRadiobVip());
+        bg1.add(getRadiobStandard());
+        bg1.add(getRadiobEmpty());
 
-     }
+    }
 
-     private void groupButtontipe_wifi() {
+    private void groupButtontipe_wifi() {
 
-         ButtonGroup bg2 = new ButtonGroup();
+        ButtonGroup bg2 = new ButtonGroup();
 
-         bg2.add(getRadiob50());
-         bg2.add(getRadiob30());
-         bg2.add(getRadiob20());
+        bg2.add(getRadiob50());
+        bg2.add(getRadiob30());
+        bg2.add(getRadiob20());
 
-     }
+    }
 
-     private void groupjk() {
-         ButtonGroup bg3 = new ButtonGroup();
-         bg3.add(getRadiobLaki());
-         bg3.add(getRadiobperempuan());
-     }
+    private void groupjk() {
+        ButtonGroup bg3 = new ButtonGroup();
+        bg3.add(getRadiobLaki());
+        bg3.add(getRadiobperempuan());
+    }
 
-     public JTextField getIemp() {
-         return iemp;
-     }
+    public JTextField getIemp() {
+        return iemp;
+    }
 
-     public JTextField getIh20() {
-         return ih20;
-     }
+    public JTextField getIh20() {
+        return ih20;
+    }
 
-     public JTextField getIh30() {
-         return ih30;
-     }
+    public JTextField getIh30() {
+        return ih30;
+    }
 
-     public JTextField getIh50() {
-         return ih50;
-     }
+    public JTextField getIh50() {
+        return ih50;
+    }
 
-     public JTextField getIstd() {
-         return istd;
-     }
+    public JTextField getIstd() {
+        return istd;
+    }
 
-     public JTextField getIvip() {
-         return ivip;
-     }
+    public JTextField getIvip() {
+        return ivip;
+    }
 
-     public void setRadiob20(JRadioButton radiob20) {
-         this.radiob20 = radiob20;
-     }
+    public void setRadiob20(JRadioButton radiob20) {
+        this.radiob20 = radiob20;
+    }
 
-     public void setRadiob30(JRadioButton radiob30) {
-         this.radiob30 = radiob30;
-     }
+    public void setRadiob30(JRadioButton radiob30) {
+        this.radiob30 = radiob30;
+    }
 
-     public void setRadiob50(JRadioButton radiob50) {
-         this.radiob50 = radiob50;
-     }
+    public void setRadiob50(JRadioButton radiob50) {
+        this.radiob50 = radiob50;
+    }
 
-     public void setRadiobEmpty(JRadioButton radiobEmpty) {
-         this.radiobEmpty = radiobEmpty;
-     }
+    public void setRadiobEmpty(JRadioButton radiobEmpty) {
+        this.radiobEmpty = radiobEmpty;
+    }
 
-     public void setRadiobLaki(JRadioButton radiobLaki) {
-         this.radiobLaki = radiobLaki;
-     }
+    public void setRadiobLaki(JRadioButton radiobLaki) {
+        this.radiobLaki = radiobLaki;
+    }
 
-     public void setRadiobStandard(JRadioButton radiobStandard) {
-         this.radiobStandard = radiobStandard;
-     }
+    public void setRadiobStandard(JRadioButton radiobStandard) {
+        this.radiobStandard = radiobStandard;
+    }
 
-     public void setRadiobVip(JRadioButton radiobVip) {
-         this.radiobVip = radiobVip;
-     }
+    public void setRadiobVip(JRadioButton radiobVip) {
+        this.radiobVip = radiobVip;
+    }
 
-     public void setRadiobperempuan(JRadioButton radiobperempuan) {
-         this.radiobperempuan = radiobperempuan;
-     }
+    public void setRadiobperempuan(JRadioButton radiobperempuan) {
+        this.radiobperempuan = radiobperempuan;
+    }
 
-     public void setValueAlamat(JTextField valueAlamat) {
-         this.valueAlamat = valueAlamat;
-     }
+    public void setValueAlamat(JTextField valueAlamat) {
+        this.valueAlamat = valueAlamat;
+    }
 
-     public void setValueNama(JTextField valueNama) {
-         this.valueNama = valueNama;
-     }
+    public void setValueNama(JTextField valueNama) {
+        this.valueNama = valueNama;
+    }
 
-     public void setValueNohp(JTextField valueNohp) {
-         this.valueNohp = valueNohp;
-     }
+    public void setValueNohp(JTextField valueNohp) {
+        this.valueNohp = valueNohp;
+    }
 
-     //akhir Section FormCheckIN
-     public void setValueSewa(JTextField valueSewa) {
-         this.valueSewa = valueSewa;
-     }
+    //akhir Section FormCheckIN
+    public void setValueSewa(JTextField valueSewa) {
+        this.valueSewa = valueSewa;
+    }
 
-     public JTable getTabelmember() {
-         return tabelmember;
-     }
+    public JTable getTabelmember() {
+        return tabelmember;
+    }
 
-     public JLabel getOutputTotal() {
-         return outputTotal;
-     }
+    public JLabel getOutputTotal() {
+        return outputTotal;
+    }
 
-     public JRadioButton getRadiob20() {
-         return radiob20;
-     }
+    public JRadioButton getRadiob20() {
+        return radiob20;
+    }
 
-     public JRadioButton getRadiob30() {
-         return radiob30;
-     }
+    public JRadioButton getRadiob30() {
+        return radiob30;
+    }
 
-     public JRadioButton getRadiob50() {
-         return radiob50;
-     }
+    public JRadioButton getRadiob50() {
+        return radiob50;
+    }
 
-     public JRadioButton getRadiobEmpty() {
-         return radiobEmpty;
-     }
+    public JRadioButton getRadiobEmpty() {
+        return radiobEmpty;
+    }
 
-     public JRadioButton getRadiobLaki() {
-         return radiobLaki;
-     }
+    public JRadioButton getRadiobLaki() {
+        return radiobLaki;
+    }
 
-     public JRadioButton getRadiobStandard() {
-         return radiobStandard;
-     }
+    public JRadioButton getRadiobStandard() {
+        return radiobStandard;
+    }
 
-     public JRadioButton getRadiobVip() {
-         return radiobVip;
-     }
+    public JRadioButton getRadiobVip() {
+        return radiobVip;
+    }
 
-     public JRadioButton getRadiobperempuan() {
-         return radiobperempuan;
-     }
+    public JRadioButton getRadiobperempuan() {
+        return radiobperempuan;
+    }
 
-     public JTextField getValueAlamat() {
-         return valueAlamat;
-     }
+    public JTextField getValueAlamat() {
+        return valueAlamat;
+    }
 
-     public JTextField getValueNama() {
-         return valueNama;
-     }
+    public JTextField getValueNama() {
+        return valueNama;
+    }
 
-     public JTextField getValueNohp() {
-         return valueNohp;
-     }
+    public JTextField getValueNohp() {
+        return valueNohp;
+    }
 
-     public JTextField getValueSewa() {
-         return valueSewa;
-     }
+    public JTextField getValueSewa() {
+        return valueSewa;
+    }
+   
+    public JPasswordField getTxtPasswordBaru() {
+        return txtPasswordBaru;
+    }
+
+    public JPasswordField getTxtPasswordLama() {
+        return txtPasswordLama;
+    }
+
+    public JPasswordField getTxtValidPassword() {
+        return txtValidPassword;
+    }
 //    Section Awal Tampilan
     private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
         try {
@@ -1674,6 +1742,15 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
         valuePanel.add(passwordPanel);
         valuePanel.repaint();
         valuePanel.revalidate();
+        
+        try {
+            //fungsi melihat tanggal
+            lastC();
+        } catch (SQLException ex) {
+            Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (AdminException ex) {
+            Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnPasswordActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
@@ -1829,10 +1906,6 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
 
     }//GEN-LAST:event_jButton8ActionPerformed
 
-    private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField9ActionPerformed
-
     private void valueSewaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_valueSewaKeyTyped
         char c = evt.getKeyChar();
         if (!(Character.isDigit(c)) || (c == KeyEvent.VK_BACK_SPACE) || (valueSewa.getText().length() == 2) || ",".equals(valueSewa.getText())) {
@@ -1874,36 +1947,6 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
 
-        Service_member_dao member = null;
-        try {
-            member = Database.getMemberDao();
-        } catch (SQLException ex) {
-            Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        List<Member> cari = null;
-        try {
-            cari = member.cariMember(valueCari.getText());
-        } catch (MemberException ex) {
-            Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        String[] array = null;
-        int i = 0;
-        String output = "";
-        if (cari.isEmpty()) {
-            output = "Nama Tidak Ditemukan";
-            Output_pencarian.setText(output);
-        }
-        for (Member ss : cari) {
-            i++;
-            String nama = ss.getNama();
-            String total = ss.getTotal().toString();
-            String ex = ss.getExpire();
-            output += "________________________________________________________\n";
-            output += i + ".Nama : " + nama + " dan Total Biaya : " + total + " Masa Belaku :" + ex + "\n";
-            output += "________________________________________________________\n";
-        }
-        Output_pencarian.setText(output);
-
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -1939,9 +1982,65 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
         // TODO add your handling code here:
     }//GEN-LAST:event_ih30ActionPerformed
 
-     /**
-      * @param args the command line arguments
-      */
+    private void jButton1MouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_jButton1MouseWheelMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1MouseWheelMoved
+
+    private void jButton1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseMoved
+        // TODO add your handling code here:
+        int i = 0;
+        String output = "";
+        Service_member_dao member = null;
+        try {
+            member = Database.getMemberDao();
+        } catch (SQLException ex) {
+            Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        List<Member> cari = null;
+        try {
+            String vCari = valueCari.getText();
+            if (vCari.isEmpty()) {
+                output = "Silahkan Isi Terlebih Dahulu";
+                Output_pencarian.setText(output);
+                return;
+            }
+            cari = member.cariMember(vCari);
+        } catch (MemberException ex) {
+            Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String[] array = null;
+        if (cari.isEmpty()) {
+            output = "Nama Tidak Ditemukan";
+            Output_pencarian.setText(output);
+        }
+        for (Member ss : cari) {
+            i++;
+            String nama = ss.getNama();
+            String total = ss.getTotal().toString();
+            String ex = ss.getExpire();
+            output += "________________________________________________________\n";
+            output += i + ".Nama : " + nama + " dan Total Biaya : " + total + " Masa Belaku :" + ex + "\n";
+            output += "________________________________________________________\n";
+        }
+        Output_pencarian.setText(output);
+
+    }//GEN-LAST:event_jButton1MouseMoved
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
+            adminController.upPasswod(this);
+        } catch (SQLException ex) {
+            Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (AdminException ex) {
+            Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea Output_pencarian;
     private javax.swing.JPanel bodyPanel;
@@ -1982,6 +2081,7 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1995,9 +2095,6 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
     private javax.swing.JLabel labelAlamat;
     private javax.swing.JLabel labelJk;
     private javax.swing.JLabel labelNama;
@@ -2039,6 +2136,10 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
     private javax.swing.JLabel title;
     private javax.swing.JLabel totalMember;
     private javax.swing.JLabel totalPendapatan;
+    private javax.swing.JLabel txtChangeP;
+    private javax.swing.JPasswordField txtPasswordBaru;
+    private javax.swing.JPasswordField txtPasswordLama;
+    private javax.swing.JPasswordField txtValidPassword;
     private javax.swing.JTextField valueAlamat;
     private javax.swing.JTextField valueCari;
     private javax.swing.JTextField valueNama;

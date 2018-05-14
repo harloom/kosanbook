@@ -209,7 +209,7 @@ public class ViewMain extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         cancel = new javax.swing.JButton();
         memberPanel = new javax.swing.JPanel();
-        jButton5 = new javax.swing.JButton();
+        btnEditDelete = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabelmember = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
@@ -224,14 +224,14 @@ public class ViewMain extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
-        dateChooserCombo1 = new datechooser.beans.DateChooserCombo();
+        dccAwal = new datechooser.beans.DateChooserCombo();
         jLabel24 = new javax.swing.JLabel();
         rData = new javax.swing.JLabel();
-        dateChooserCombo2 = new datechooser.beans.DateChooserCombo();
+        dccAkhir = new datechooser.beans.DateChooserCombo();
         jLabel23 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
+        btnResetReport = new javax.swing.JButton();
         passwordPanel = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
@@ -1148,8 +1148,13 @@ public class ViewMain extends javax.swing.JFrame {
 
         valuePanel.add(pricePanel, "card5");
 
-        jButton5.setBackground(new java.awt.Color(-1,true));
-        jButton5.setText("Edit / Delete");
+        btnEditDelete.setBackground(new java.awt.Color(-1,true));
+        btnEditDelete.setText("Edit / Delete");
+        btnEditDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditDeleteActionPerformed(evt);
+            }
+        });
 
         tabelmember.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -2204,7 +2209,7 @@ public class ViewMain extends javax.swing.JFrame {
                 .addGap(34, 34, 34))
             .addGroup(memberPanelLayout.createSequentialGroup()
                 .addGap(396, 396, 396)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnEditDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         memberPanelLayout.setVerticalGroup(
@@ -2219,7 +2224,7 @@ public class ViewMain extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton5)
+                .addComponent(btnEditDelete)
                 .addGap(75, 75, 75))
         );
 
@@ -2247,7 +2252,7 @@ public class ViewMain extends javax.swing.JFrame {
         jLabel22.setText("Tipe Kamar");
 
         try {
-            dateChooserCombo1.setDefaultPeriods(new datechooser.model.multiple.PeriodSet());
+            dccAwal.setDefaultPeriods(new datechooser.model.multiple.PeriodSet());
         } catch (datechooser.model.exeptions.IncompatibleDataExeption e1) {
             e1.printStackTrace();
         }
@@ -2258,7 +2263,7 @@ public class ViewMain extends javax.swing.JFrame {
         rData.setText("0");
 
         try {
-            dateChooserCombo2.setDefaultPeriods(new datechooser.model.multiple.PeriodSet());
+            dccAkhir.setDefaultPeriods(new datechooser.model.multiple.PeriodSet());
         } catch (datechooser.model.exeptions.IncompatibleDataExeption e1) {
             e1.printStackTrace();
         }
@@ -2277,7 +2282,7 @@ public class ViewMain extends javax.swing.JFrame {
                     .addGroup(rBgLayout.createSequentialGroup()
                         .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(57, 57, 57)
-                        .addComponent(dateChooserCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(dccAwal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(rBgLayout.createSequentialGroup()
                         .addGroup(rBgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2295,7 +2300,7 @@ public class ViewMain extends javax.swing.JFrame {
                         .addGap(8, 8, 8)
                         .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 7, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(dateChooserCombo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(dccAkhir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(140, Short.MAX_VALUE))
             .addGroup(rBgLayout.createSequentialGroup()
                 .addGap(50, 50, 50)
@@ -2331,8 +2336,8 @@ public class ViewMain extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(rBgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dateChooserCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dateChooserCombo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(dccAwal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dccAkhir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(54, Short.MAX_VALUE))
         );
 
@@ -2344,11 +2349,11 @@ public class ViewMain extends javax.swing.JFrame {
             }
         });
 
-        jButton9.setBackground(new java.awt.Color(-1,true));
-        jButton9.setText("Reset");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
+        btnResetReport.setBackground(new java.awt.Color(-1,true));
+        btnResetReport.setText("Reset");
+        btnResetReport.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
+                btnResetReportActionPerformed(evt);
             }
         });
 
@@ -2360,7 +2365,7 @@ public class ViewMain extends javax.swing.JFrame {
                 .addGap(64, 64, 64)
                 .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45)
-                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnResetReport, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, reportPanelLayout.createSequentialGroup()
                 .addContainerGap(26, Short.MAX_VALUE)
@@ -2375,7 +2380,7 @@ public class ViewMain extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(reportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnResetReport, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(145, Short.MAX_VALUE))
         );
 
@@ -2509,22 +2514,32 @@ public class ViewMain extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(922, 655));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-void reportcmbReset(){
-            // set comboBox jumlah data//
+void reportcmbReset() {
+        //setfield
+         rData.setText("0 Data");
+        dccAkhir.setSelectedDate(null);
+        dccAwal.setSelectedDate(null);
+
+        // set comboBox jumlah data//
         cmbJumlahData.removeAllItems();
+        cmbJumlahData.addItem("--Pilih Jumlah Data--");
         cmbJumlahData.addItem("5");
         cmbJumlahData.addItem("10");
         cmbJumlahData.addItem("15");
         cmbJumlahData.addItem("20");
+        cmbJumlahData.setSelectedIndex(0);
         //-----------------------------------//
 
         //set ComboBox tipeKamar//
         cmbTipekamar.removeAllItems();
+        cmbTipekamar.addItem("--Pilih Jenis Kamar--");
         cmbTipekamar.addItem("VIP");
         cmbTipekamar.addItem("Standart");
         cmbTipekamar.addItem("Kosong");
+        cmbTipekamar.setSelectedIndex(0);
         //-----------------------------------//
-}
+    }
+
     //Section FormCheckIN
     public void countMember() throws MemberException, SQLException {
 //        deklrasi variabel untuk jtext
@@ -3086,9 +3101,15 @@ void reportcmbReset(){
         }
     }//GEN-LAST:event_btnHitungcActionPerformed
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+    private void btnResetReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetReportActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton9ActionPerformed
+        reportCek.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
+        rData.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
+        rData.setText("0 Data");
+        reportCek.setText("");
+        reportcmbReset();
+
+    }//GEN-LAST:event_btnResetReportActionPerformed
 
     private void radiobLakiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radiobLakiActionPerformed
         // TODO add your handling code here:
@@ -3236,7 +3257,7 @@ void reportcmbReset(){
                     cmbJumlahData.setSelectedIndex(0);
                 }
             }
-            
+
         } catch (MemberException ex) {
             Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -3318,6 +3339,23 @@ void reportcmbReset(){
 
     }//GEN-LAST:event_valueNohpFocusGained
 
+
+          Edit editordelete = new Edit();
+    private void btnEditDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditDeleteActionPerformed
+ 
+            // TODO add your handling code here:
+            editordelete.requestFocus();
+            editordelete.datatable();
+            System.out.println(editordelete.isFlagEdit());
+                if(editordelete.isFlagEdit() == false){
+                       editordelete.setFlagEdit(true);
+                       editordelete.setVisible(true);
+                }
+             
+
+
+    }//GEN-LAST:event_btnEditDeleteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -3325,6 +3363,7 @@ void reportcmbReset(){
     private javax.swing.JTextArea Output_pencarian;
     private javax.swing.JPanel bodyPanel;
     private javax.swing.JButton btnCheck;
+    private javax.swing.JButton btnEditDelete;
     private javax.swing.JButton btnHitungc;
     private javax.swing.JButton btnHome;
     private javax.swing.JButton btnLogout;
@@ -3332,14 +3371,15 @@ void reportcmbReset(){
     private javax.swing.JButton btnPassword;
     private javax.swing.JButton btnPrice;
     private javax.swing.JButton btnReport;
+    private javax.swing.JButton btnResetReport;
     private javax.swing.JButton btnResetc;
     private javax.swing.JButton btnsimpan;
     private javax.swing.JButton cancel;
     private javax.swing.JPanel checkPanel;
     private javax.swing.JComboBox<String> cmbJumlahData;
     private javax.swing.JComboBox<String> cmbTipekamar;
-    private datechooser.beans.DateChooserCombo dateChooserCombo1;
-    private datechooser.beans.DateChooserCombo dateChooserCombo2;
+    private datechooser.beans.DateChooserCombo dccAkhir;
+    private datechooser.beans.DateChooserCombo dccAwal;
     private javax.swing.JPanel homePanel;
     private javax.swing.JTextField iemp;
     private javax.swing.JTextField ih20;
@@ -3348,10 +3388,8 @@ void reportcmbReset(){
     private javax.swing.JTextField istd;
     private javax.swing.JTextField ivip;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

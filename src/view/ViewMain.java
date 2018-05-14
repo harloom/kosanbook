@@ -21,7 +21,6 @@ import error.AdminException;
 import error.HargaException;
 import error.MemberException;
 
-import event.MemberListiner;
 import java.awt.Color;
 
 import java.awt.event.KeyEvent;
@@ -29,6 +28,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -51,7 +51,7 @@ import sound.Hime;
  *
  * @author Admin
  */
-public class ViewMain extends javax.swing.JFrame implements MemberListiner {
+public class ViewMain extends javax.swing.JFrame {
 
     private TabelMemberModel tabelmembermodel;
     private MemberController membercontroller;
@@ -82,8 +82,8 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
     public ViewMain() throws MemberException, SQLException {
         tabelmembermodel = new TabelMemberModel();
         memberModel = new MemberModel();
-        memberModel.setListiner(this);
-       // Menghubungkan Controller member
+
+        // Menghubungkan Controller member
         membercontroller = new MemberController();
         membercontroller.setModel(memberModel);
         // Menghubungkan Controller Harga
@@ -94,21 +94,21 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
         adminModel = new AdminModel();
         adminController = new AdminController();
         adminController.setAdminModel(adminModel);
-        
+
         sound = new Hime();
         sound.hime();
         initComponents();
         tabelmember.setModel(tabelmembermodel);
 
-        groupjk();
-        groupButtontipe_kamar();
-        groupButtontipe_wifi();
+        groupRadio();
         countMember();
         loadDatatabel();
+        reportcmbReset();
+
         setExtendedState(JFrame.MAXIMIZED_HORIZ);
         setVisible(true);
         setResizable(false);
-        ;
+
     }
 
     /**
@@ -141,6 +141,16 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
         totalPendapatan = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
+        labelLaki = new javax.swing.JLabel();
+        labelPerempuan = new javax.swing.JLabel();
+        labelHomeVip = new javax.swing.JLabel();
+        labelHomeStd = new javax.swing.JLabel();
+        labelHomeKsng = new javax.swing.JLabel();
+        labelHome50Mbps = new javax.swing.JLabel();
+        labelHome30Mbps = new javax.swing.JLabel();
+        labelHome20Mbps = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         checkPanel = new javax.swing.JPanel();
         labelNama = new javax.swing.JLabel();
         labelJk = new javax.swing.JLabel();
@@ -199,21 +209,29 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
         jButton6 = new javax.swing.JButton();
         cancel = new javax.swing.JButton();
         memberPanel = new javax.swing.JPanel();
-        jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabelmember = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         valueCari = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         Output_pencarian = new javax.swing.JTextArea();
         reportPanel = new javax.swing.JPanel();
+        rBg = new javax.swing.JPanel();
+        cmbJumlahData = new javax.swing.JComboBox<>();
+        reportCek = new javax.swing.JTextField();
+        cmbTipekamar = new javax.swing.JComboBox<>();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        dateChooserCombo1 = new datechooser.beans.DateChooserCombo();
+        jLabel24 = new javax.swing.JLabel();
+        rData = new javax.swing.JLabel();
+        dateChooserCombo2 = new datechooser.beans.DateChooserCombo();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton10 = new javax.swing.JButton();
         passwordPanel = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
@@ -477,7 +495,7 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 72, Short.MAX_VALUE)
+                .addGap(0, 87, Short.MAX_VALUE)
                 .addComponent(totalPendapatan, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -492,7 +510,33 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
         jPanel3.setBackground(new java.awt.Color(-1,true));
 
         jLabel8.setFont(new java.awt.Font("Dialog", 0, 18));
-        jLabel8.setText("Laporang Bulan Ini");
+        jLabel8.setText("<html> <u>Laporang Data Paket Favorit</ui> <html>");
+
+        labelLaki.setFont(new java.awt.Font("Dialog", 0, 18));
+        labelLaki.setText("Pria = 0 Penghuni");
+
+        labelPerempuan.setFont(new java.awt.Font("Dialog", 0, 18));
+        labelPerempuan.setText("Perempuan = 0 Penghuni");
+
+        labelHomeVip.setFont(new java.awt.Font("Dialog", 0, 18));
+        labelHomeVip.setText("VIP = 0 Penghuni");
+
+        labelHomeStd.setFont(new java.awt.Font("Dialog", 0, 18));
+        labelHomeStd.setText("Standart = 0 Penghuni");
+
+        labelHomeKsng.setFont(new java.awt.Font("Dialog", 0, 18));
+        labelHomeKsng.setText("Kosong = 0 Penghuni");
+
+        labelHome50Mbps.setFont(new java.awt.Font("Dialog", 0, 18));
+        labelHome50Mbps.setText("50Mbps = 0 Penghuni");
+
+        labelHome30Mbps.setFont(new java.awt.Font("Dialog", 0, 18));
+        labelHome30Mbps.setText("30Mbps = 0 Penghuni");
+
+        labelHome20Mbps.setFont(new java.awt.Font("Dialog", 0, 18));
+        labelHome20Mbps.setText("20Mbps = 0 Penghuni");
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/m-chan.gif"))); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -500,15 +544,55 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(jLabel8)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelPerempuan, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelLaki, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelHome20Mbps, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelHome30Mbps, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelHomeVip, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelHomeStd, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelHomeKsng, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelHome50Mbps, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addGap(104, 104, 104))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel8)
-                .addContainerGap(296, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(labelLaki)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(labelPerempuan)
+                                .addGap(23, 23, 23)
+                                .addComponent(labelHomeVip)
+                                .addGap(1, 1, 1)
+                                .addComponent(labelHomeStd)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(labelHomeKsng)
+                                .addGap(38, 38, 38)
+                                .addComponent(labelHome50Mbps))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labelHome30Mbps, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labelHome20Mbps, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(218, 218, 218)
+                        .addComponent(jLabel4)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout homePanelLayout = new javax.swing.GroupLayout(homePanel);
@@ -549,10 +633,10 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
         labelAlamat.setText("Alamat");
 
         labelSewa.setFont(new java.awt.Font("Dialog", 0, 18));
-        labelSewa.setText("Sewa/bulan");
+        labelSewa.setText("Sewa/bulan*");
 
         labelNohp.setFont(new java.awt.Font("Dialog", 0, 18));
-        labelNohp.setText("No. Hp");
+        labelNohp.setText("No. Hp (08)");
 
         labelTipekamar.setFont(new java.awt.Font("Dialog", 0, 18));
         labelTipekamar.setText("Tipe Kamar");
@@ -560,25 +644,27 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
         labelWifi.setFont(new java.awt.Font("Dialog", 0, 18));
         labelWifi.setText("Wi-Fi");
 
+        valueNohp.setText("08");
         valueNohp.setBorder(null);
-        valueNohp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                valueNohpActionPerformed(evt);
+        valueNohp.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                valueNohpFocusGained(evt);
             }
         });
         valueNohp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                valueNohpKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 valueNohpKeyTyped(evt);
             }
         });
 
         valueSewa.setBorder(null);
-        valueSewa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                valueSewaActionPerformed(evt);
-            }
-        });
         valueSewa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                valueSewaKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 valueSewaKeyTyped(evt);
             }
@@ -590,16 +676,19 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
                 valueAlamatActionPerformed(evt);
             }
         });
-
-        valueNama.setBorder(null);
-        valueNama.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                valueNamaActionPerformed(evt);
+        valueAlamat.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                valueAlamatKeyReleased(evt);
             }
         });
+
+        valueNama.setBorder(null);
         valueNama.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 valueNamaKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                valueNamaKeyReleased(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 valueNamaKeyTyped(evt);
@@ -715,11 +804,11 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
                                 .addComponent(labelVvip, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(45, 45, 45))
                             .addGroup(panelInfoLayout.createSequentialGroup()
-                                .addComponent(labelVstd, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+                                .addComponent(labelVstd, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
                                 .addGap(59, 59, 59))
                             .addComponent(labelV50, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(panelInfoLayout.createSequentialGroup()
-                                .addComponent(labelV30, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+                                .addComponent(labelV30, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
                                 .addGap(14, 14, 14))
                             .addGroup(panelInfoLayout.createSequentialGroup()
                                 .addComponent(labelV20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -822,12 +911,13 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
                             .addGroup(checkPanelLayout.createSequentialGroup()
                                 .addGroup(checkPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(labelNama)
-                                    .addComponent(labelNohp)
-                                    .addComponent(labelTipekamar)
                                     .addComponent(labelSewa)
                                     .addComponent(labelAlamat)
                                     .addComponent(labelJk)
-                                    .addComponent(labelWifi))
+                                    .addComponent(labelWifi)
+                                    .addGroup(checkPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(labelNohp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(labelTipekamar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .addGap(36, 36, 36)
                                 .addGroup(checkPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(checkPanelLayout.createSequentialGroup()
@@ -1058,34 +1148,1025 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
 
         valuePanel.add(pricePanel, "card5");
 
-        jButton4.setBackground(new java.awt.Color(-1,true));
-        jButton4.setText("Edit");
-
         jButton5.setBackground(new java.awt.Color(-1,true));
-        jButton5.setText("Delete");
+        jButton5.setText("Edit / Delete");
 
         tabelmember.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Nama", "Total Biaya", "Tenggang Waktu"
+                "Nama", "Total Biaya", "Tenggang Waktu", "Title 4", "Title 5"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Float.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.Float.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
+        tabelmember.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         tabelmember.setGridColor(new java.awt.Color(255, 255, 255));
         jScrollPane2.setViewportView(tabelmember);
 
@@ -1093,28 +2174,9 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
         jLabel3.setText("Cari");
 
         valueCari.setBorder(null);
-        valueCari.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                valueCariActionPerformed(evt);
-            }
-        });
-
-        jButton1.setBackground(new java.awt.Color(-1,true));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/icons8-search-20.png"))); // NOI18N
-        jButton1.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
-        jButton1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                jButton1MouseMoved(evt);
-            }
-        });
-        jButton1.addMouseWheelListener(new java.awt.event.MouseWheelListener() {
-            public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
-                jButton1MouseWheelMoved(evt);
-            }
-        });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        valueCari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                valueCariKeyReleased(evt);
             }
         });
 
@@ -1128,52 +2190,154 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
         memberPanelLayout.setHorizontalGroup(
             memberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(memberPanelLayout.createSequentialGroup()
+                .addGap(47, 47, 47)
                 .addGroup(memberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 611, Short.MAX_VALUE)
                     .addGroup(memberPanelLayout.createSequentialGroup()
-                        .addGap(472, 472, 472)
-                        .addComponent(jButton4)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton5))
-                    .addGroup(memberPanelLayout.createSequentialGroup()
-                        .addGap(47, 47, 47)
                         .addGroup(memberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
                             .addGroup(memberPanelLayout.createSequentialGroup()
-                                .addGroup(memberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(memberPanelLayout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(valueCari, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 567, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(valueCari, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 567, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 44, Short.MAX_VALUE)))
                 .addGap(34, 34, 34))
+            .addGroup(memberPanelLayout.createSequentialGroup()
+                .addGap(396, 396, 396)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         memberPanelLayout.setVerticalGroup(
             memberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, memberPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(memberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(memberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3)
-                        .addComponent(valueCari, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(memberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(valueCari, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(13, 13, 13)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(memberPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5)
-                    .addComponent(jButton4))
+                .addComponent(jButton5)
                 .addGap(75, 75, 75))
         );
 
         valuePanel.add(memberPanel, "card4");
 
+        rBg.setBackground(new java.awt.Color(255, 255, 255));
+
+        cmbJumlahData.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        reportCek.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                reportCekKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                reportCekKeyTyped(evt);
+            }
+        });
+
+        cmbTipekamar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel19.setText("Pencarian");
+
+        jLabel21.setText("Jumlah Data*");
+
+        jLabel22.setText("Tipe Kamar");
+
+        try {
+            dateChooserCombo1.setDefaultPeriods(new datechooser.model.multiple.PeriodSet());
+        } catch (datechooser.model.exeptions.IncompatibleDataExeption e1) {
+            e1.printStackTrace();
+        }
+
+        jLabel24.setFont(new java.awt.Font("Magneto", 1, 18)); // NOI18N
+        jLabel24.setText("Kategori Cetak");
+
+        rData.setText("0");
+
+        try {
+            dateChooserCombo2.setDefaultPeriods(new datechooser.model.multiple.PeriodSet());
+        } catch (datechooser.model.exeptions.IncompatibleDataExeption e1) {
+            e1.printStackTrace();
+        }
+
+        jLabel23.setText("Tanggal Awal");
+
+        jLabel25.setText("-");
+
+        javax.swing.GroupLayout rBgLayout = new javax.swing.GroupLayout(rBg);
+        rBg.setLayout(rBgLayout);
+        rBgLayout.setHorizontalGroup(
+            rBgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(rBgLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(rBgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(rBgLayout.createSequentialGroup()
+                        .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(57, 57, 57)
+                        .addComponent(dateChooserCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(rBgLayout.createSequentialGroup()
+                        .addGroup(rBgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE))
+                        .addGap(61, 61, 61)
+                        .addGroup(rBgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cmbJumlahData, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(reportCek)
+                            .addComponent(cmbTipekamar, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(rBgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rData, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(rBgLayout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 7, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(dateChooserCombo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(140, Short.MAX_VALUE))
+            .addGroup(rBgLayout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        rBgLayout.setVerticalGroup(
+            rBgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(rBgLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addGroup(rBgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(reportCek, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel19)
+                    .addComponent(rData, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(rBgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cmbJumlahData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(rBgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(rBgLayout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(rBgLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmbTipekamar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(rBgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(rBgLayout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(rBgLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(rBgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dateChooserCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dateChooserCombo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(54, Short.MAX_VALUE))
+        );
+
         jButton8.setBackground(new java.awt.Color(-1,true));
-        jButton8.setText("Lihat Data Penghuni");
+        jButton8.setText("Cetak Data Penghuni");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
@@ -1181,31 +2345,10 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
         });
 
         jButton9.setBackground(new java.awt.Color(-1,true));
-        jButton9.setText("Lihat Laporan Keuangan");
+        jButton9.setText("Reset");
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton9ActionPerformed(evt);
-            }
-        });
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        jButton10.setBackground(new java.awt.Color(-1,true));
-        jButton10.setText("Print");
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
             }
         });
 
@@ -1214,29 +2357,26 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
         reportPanelLayout.setHorizontalGroup(
             reportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(reportPanelLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(reportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(reportPanelLayout.createSequentialGroup()
-                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(reportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 583, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addGap(64, 64, 64)
+                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, reportPanelLayout.createSequentialGroup()
+                .addContainerGap(26, Short.MAX_VALUE)
+                .addComponent(rBg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
         );
         reportPanelLayout.setVerticalGroup(
             reportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(reportPanelLayout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(22, 22, 22)
+                .addComponent(rBg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
                 .addGroup(reportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton10)
-                .addGap(36, 36, 36))
+                .addContainerGap(145, Short.MAX_VALUE))
         );
 
         valuePanel.add(reportPanel, "card6");
@@ -1295,7 +2435,7 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
                         .addComponent(jLabel20)
                         .addGap(18, 18, 18)
                         .addComponent(txtChangeP, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(171, Short.MAX_VALUE))
+                .addContainerGap(186, Short.MAX_VALUE))
         );
         passwordPanelLayout.setVerticalGroup(
             passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1318,7 +2458,7 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
                 .addGroup(passwordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtValidPassword))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(253, 253, 253))
         );
@@ -1366,42 +2506,105 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(906, 655));
+        setSize(new java.awt.Dimension(922, 655));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+void reportcmbReset(){
+            // set comboBox jumlah data//
+        cmbJumlahData.removeAllItems();
+        cmbJumlahData.addItem("5");
+        cmbJumlahData.addItem("10");
+        cmbJumlahData.addItem("15");
+        cmbJumlahData.addItem("20");
+        //-----------------------------------//
 
+        //set ComboBox tipeKamar//
+        cmbTipekamar.removeAllItems();
+        cmbTipekamar.addItem("VIP");
+        cmbTipekamar.addItem("Standart");
+        cmbTipekamar.addItem("Kosong");
+        //-----------------------------------//
+}
     //Section FormCheckIN
-    private void countMember() throws MemberException, SQLException {
-
+    public void countMember() throws MemberException, SQLException {
+//        deklrasi variabel untuk jtext
+        int countLaki = 0,
+                countPerempuan = 0,
+                countVip = 0,
+                countStd = 0,
+                countKosong = 0,
+                count50 = 0,
+                count30 = 0,
+                count20 = 0;
         int countm = 0;
         Service_member_dao member = Database.getMemberDao();
         List<Member> listmember = member.selectallmember();
         int tp = 0;
+        //menhitung jumlah list
         for (Member value : listmember) {
             countm += 1;
             tp += value.getTotal();
+            if ("Pria".equals(value.getJenis_kelamin())) {
+                countLaki += 1;
+            }
+            if ("Wanita".equals(value.getJenis_kelamin())) {
+                countPerempuan += 1;
+            }
+            if ("VIP".equals(value.getTipe_kamar())) {
+                countVip += 1;
+//                System.out.println("True");
+            }
+            if ("Standar".equals(value.getTipe_kamar())) {
+                countStd += 1;
+            }
+            if ("Kosong".equals(value.getTipe_kamar())) {
+                countKosong += 1;
+            }
+            if ("50Mbps".equals(value.getTipe_wifi())) {
+                count50 += 1;
+            }
+            if ("30Mbps".equals(value.getTipe_wifi())) {
+                count30 += 1;
+            }
+            if ("20Mbps".equals(value.getTipe_wifi())) {
+                count20 += 1;
+            }
+
+            if (tp != 0) {
+                StringBuffer sb = new StringBuffer(Integer.toString(tp));
+                if (sb.length() >= 0 && sb.length() <= 6) {
+                    sb.insert(3, ".");
+                } else if (sb.length() == 7) {
+                    sb.insert(5, ".");
+                } else if (sb.length() == 8) {
+                    sb.insert(2, ".");
+                    sb.insert(6, ".");
+                } else if (sb.length() == 9) {
+                    sb.insert(3, ".");
+                    sb.insert(7, ".");
+                } else if (sb.length() == 10) {
+                    sb.insert(1, ".");
+                    sb.insert(5, ".");
+                    sb.insert(9, ".");
+                }
+                // set value ke jtext
+                totalMember.setText(Integer.toString(countm));
+                totalPendapatan.setText("Rp. " + sb.toString());
+                labelLaki.setText("Pria = " + countLaki + " Penghuni");
+                labelPerempuan.setText("Wanita = " + countPerempuan + " Penghuni");
+                labelHomeVip.setText("VIP \t\t= " + countVip + " Penghuni");
+                labelHomeStd.setText("Standart = " + countStd + " Penghuni");
+                labelHomeKsng.setText("Kosong = " + countKosong + " Penghuni");
+                labelHome50Mbps.setText("50Mbps = " + count50 + " Penghuni");
+                labelHome30Mbps.setText("30Mbps = " + count30 + " Penghuni");
+                labelHome20Mbps.setText("20Mbps = " + count20 + " Penghuni");
+            }
+
         }
-        StringBuffer sb = new StringBuffer(Integer.toString(tp));
-        if (sb.length() >= 0 && sb.length() <= 6) {
-            sb.insert(3, ".");
-        } else if (sb.length() == 7) {
-            sb.insert(5, ".");
-        } else if (sb.length() == 8) {
-            sb.insert(2, ".");
-            sb.insert(6, ".");
-        } else if (sb.length() == 9) {
-            sb.insert(3, ".");
-            sb.insert(7, ".");
-        } else if (sb.length() == 10) {
-            sb.insert(1, ".");
-            sb.insert(5, ".");
-            sb.insert(9, ".");
-        }
-        totalMember.setText(Integer.toString(countm));
-        totalPendapatan.setText("Rp. " + sb.toString());
     }
+
     private void lastC() throws SQLException, AdminException {
-                //ambil data password lama
+        //ambil data password lama
         String tgl = null;
         AdminDao daolist = Database.getAdminDao();
         List<Admin> aa = daolist.listAdmin();
@@ -1415,31 +2618,33 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
         Service_member_dao member = Database.getMemberDao();
         tabelmembermodel.setList(member.selectallmember());
     }
+    // deklarasi global group
+    ButtonGroup bg1 = new ButtonGroup();
+    ButtonGroup bg2 = new ButtonGroup();
+    ButtonGroup bg3 = new ButtonGroup();
 
-    private void groupButtontipe_kamar() {
-
-        ButtonGroup bg1 = new ButtonGroup();
-
+    private void groupRadio() {
+        Output_pencarian.setEditable(false);
         bg1.add(getRadiobVip());
         bg1.add(getRadiobStandard());
         bg1.add(getRadiobEmpty());
-
-    }
-
-    private void groupButtontipe_wifi() {
-
-        ButtonGroup bg2 = new ButtonGroup();
-
         bg2.add(getRadiob50());
         bg2.add(getRadiob30());
         bg2.add(getRadiob20());
-
-    }
-
-    private void groupjk() {
-        ButtonGroup bg3 = new ButtonGroup();
         bg3.add(getRadiobLaki());
         bg3.add(getRadiobperempuan());
+    }
+
+    public ButtonGroup getBg1() {
+        return bg1;
+    }
+
+    public ButtonGroup getBg2() {
+        return bg2;
+    }
+
+    public ButtonGroup getBg3() {
+        return bg3;
     }
 
     public JTextField getIemp() {
@@ -1570,7 +2775,7 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
     public JTextField getValueSewa() {
         return valueSewa;
     }
-   
+
     public JPasswordField getTxtPasswordBaru() {
         return txtPasswordBaru;
     }
@@ -1626,6 +2831,9 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
         valuePanel.add(checkPanel);
         valuePanel.repaint();
         valuePanel.revalidate();
+
+        //setup checkin
+        membercontroller.resetForm(this);
 
         HargaDao harga = null;
         try {
@@ -1742,7 +2950,7 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
         valuePanel.add(passwordPanel);
         valuePanel.repaint();
         valuePanel.revalidate();
-        
+
         try {
             //fungsi melihat tanggal
             lastC();
@@ -1757,13 +2965,11 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
         // TODO add your handling code here:
 
         int dialogBtn = JOptionPane.YES_NO_OPTION;
-        int dialogResIult = JOptionPane.showConfirmDialog(this, "Anda yakin akan keluar?", "PERINGATAN", dialogBtn);
+        int dialogResIult = JOptionPane.showConfirmDialog(this, "Anda yakin akan keluar?", "PERINGATAN", JOptionPane.WARNING_MESSAGE, dialogBtn);
 
         if (dialogResIult == 0) {
             //true condition
             System.exit(0);
-        } else {
-            //false condition
         }
     }//GEN-LAST:event_btnLogoutActionPerformed
 
@@ -1828,21 +3034,9 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
         btnPassword.setBackground(Color.white);
     }//GEN-LAST:event_btnPasswordMouseExited
 
-    private void valueNohpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valueNohpActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_valueNohpActionPerformed
-
-    private void valueSewaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valueSewaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_valueSewaActionPerformed
-
     private void valueAlamatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valueAlamatActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_valueAlamatActionPerformed
-
-    private void valueNamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valueNamaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_valueNamaActionPerformed
 
     private void radiobVipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radiobVipActionPerformed
         // TODO add your handling code here:
@@ -1869,12 +3063,15 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
     }//GEN-LAST:event_radiob20ActionPerformed
 
     private void btnResetcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetcActionPerformed
-        valueNama.setText("");
-        valueAlamat.setText("");
-        valueAlamat.setText("");
-        valueSewa.setText("");
-        outputTotal.setText("");
-
+        membercontroller.resetForm(this);
+//        valueNama.setText("");
+//    
+//        valueAlamat.setText("");
+//        valueSewa.setText("");
+//        outputTotal.setText("");
+//        bg1.clearSelection();
+//        bg2.clearSelection();
+//        bg3.clearSelection();
 
     }//GEN-LAST:event_btnResetcActionPerformed
 
@@ -1892,10 +3089,6 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton9ActionPerformed
-
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton10ActionPerformed
 
     private void radiobLakiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radiobLakiActionPerformed
         // TODO add your handling code here:
@@ -1915,8 +3108,18 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
 
     private void valueNohpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_valueNohpKeyTyped
         char c = evt.getKeyChar();
-        if (!(Character.isDigit(c)) || (c == KeyEvent.VK_BACK_SPACE) || (valueNohp.getText().length() == 14)) {
+//        char[] val = new char[14];
+//        for (int i = 0; i < val.length; i++) {
+//            val[i] = c;
+//        }
+//        if (val[0] != '0') {
+//            valueNohp.setText("");
+//        }else if (val[1] != '8') {
+//            valueNohp.setText("");
+//        }
+        if (!(Character.isDigit(c)) || (c == KeyEvent.VK_BACK_SPACE) || (valueNohp.getText().length() == 12)) {
             evt.consume();
+
         }
     }//GEN-LAST:event_valueNohpKeyTyped
 
@@ -1941,18 +3144,9 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
             Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
         }
         System.out.println("click Simpan");
+//        membercontroller.resetForm(this);
     }//GEN-LAST:event_btnsimpanActionPerformed
 
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-
-
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void valueCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valueCariActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_valueCariActionPerformed
 
     private void cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionPerformed
         try {
@@ -1982,11 +3176,75 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
         // TODO add your handling code here:
     }//GEN-LAST:event_ih30ActionPerformed
 
-    private void jButton1MouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_jButton1MouseWheelMoved
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1MouseWheelMoved
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
+            adminController.upPasswod(this);
+        } catch (SQLException ex) {
+            Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (AdminException ex) {
+            Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-    private void jButton1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseMoved
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void reportCekKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_reportCekKeyTyped
+        // TODO add your handling code here:
+
+        char c = evt.getKeyChar();
+        if (reportCek.getText().length() == 30) {
+            evt.consume();
+        }
+
+
+    }//GEN-LAST:event_reportCekKeyTyped
+    public String ceknama;
+    private void reportCekKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_reportCekKeyReleased
+        int i = 0;
+        Service_member_dao member = null;
+        try {
+            member = Database.getMemberDao();
+        } catch (SQLException ex) {
+            Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        List<Member> cari = null;
+        try {
+            String vCari = reportCek.getText();
+            if (reportCek.getText().isEmpty()) {
+                reportCek.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
+                rData.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
+                rData.setText(Integer.toString(i) + " Data");
+                reportcmbReset();
+
+            } else {
+                cari = member.cariMember(vCari);
+                for (Member ss : cari) {
+//                    ceknama = ss.getNama().toLowerCase();
+                    i++;
+                }
+                if (cari.isEmpty()) {
+                    reportCek.setBorder(BorderFactory.createLineBorder(Color.red));
+                    rData.setBorder(BorderFactory.createLineBorder(Color.red));
+                    rData.setText(Integer.toString(i) + " Data");
+                    reportcmbReset();
+                } else {
+                    reportCek.setBorder(BorderFactory.createLineBorder(Color.green));
+                    rData.setBorder(BorderFactory.createLineBorder(Color.red));
+                    rData.setText(Integer.toString(i) + " Data");
+                    cmbJumlahData.removeAllItems();
+                    cmbJumlahData.addItem(Integer.toString(i));
+                    cmbJumlahData.setSelectedIndex(0);
+                }
+            }
+            
+        } catch (MemberException ex) {
+            Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+    }//GEN-LAST:event_reportCekKeyReleased
+
+    private void valueCariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_valueCariKeyReleased
         // TODO add your handling code here:
         int i = 0;
         String output = "";
@@ -2002,41 +3260,63 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
             if (vCari.isEmpty()) {
                 output = "Silahkan Isi Terlebih Dahulu";
                 Output_pencarian.setText(output);
+                Output_pencarian.setBorder(BorderFactory.createLineBorder(Color.gray));
                 return;
             }
             cari = member.cariMember(vCari);
         } catch (MemberException ex) {
             Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
         }
-        String[] array = null;
+
         if (cari.isEmpty()) {
             output = "Nama Tidak Ditemukan";
             Output_pencarian.setText(output);
+            Output_pencarian.setBorder(BorderFactory.createLineBorder(Color.red));
+        } else {
+            for (Member ss : cari) {
+                i++;
+                String nama = ss.getNama();
+                String total = ss.getTotal().toString();
+                String ex = ss.getExpire();
+                output += "________________________________________________________\n";
+                output += i + ".Nama : " + nama + " dan Total Biaya : " + total + " Masa Belaku :" + ex + "\n";
+                output += "________________________________________________________\n";
+            }
+            Output_pencarian.setBorder(BorderFactory.createLineBorder(Color.green));
+            Output_pencarian.setText(output);        // TODO add your handling code here:
         }
-        for (Member ss : cari) {
-            i++;
-            String nama = ss.getNama();
-            String total = ss.getTotal().toString();
-            String ex = ss.getExpire();
-            output += "________________________________________________________\n";
-            output += i + ".Nama : " + nama + " dan Total Biaya : " + total + " Masa Belaku :" + ex + "\n";
-            output += "________________________________________________________\n";
-        }
-        Output_pencarian.setText(output);
 
-    }//GEN-LAST:event_jButton1MouseMoved
+    }//GEN-LAST:event_valueCariKeyReleased
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        try {
-            adminController.upPasswod(this);
-        } catch (SQLException ex) {
-            Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (AdminException ex) {
-            Logger.getLogger(ViewMain.class.getName()).log(Level.SEVERE, null, ex);
+    private void valueNamaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_valueNamaKeyReleased
+        // TODO add your handling code here:
+        membercontroller.setColorValidation(this);
+    }//GEN-LAST:event_valueNamaKeyReleased
+
+    private void valueAlamatKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_valueAlamatKeyReleased
+        // TODO add your handling code here:
+        membercontroller.setColorValidation(this);
+    }//GEN-LAST:event_valueAlamatKeyReleased
+
+    private void valueSewaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_valueSewaKeyReleased
+        // TODO add your handling code here:
+        membercontroller.setColorValidation(this);
+    }//GEN-LAST:event_valueSewaKeyReleased
+
+    private void valueNohpKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_valueNohpKeyReleased
+        // TODO add your handling code here:
+        membercontroller.setColorValidation(this);
+    }//GEN-LAST:event_valueNohpKeyReleased
+
+    private void valueNohpFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_valueNohpFocusGained
+        // TODO add your handling code here:
+
+        if (valueNohp.getText().isEmpty()) {
+            valueNohp.setText("08");
         }
-        
-        
-    }//GEN-LAST:event_jButton2ActionPerformed
+
+
+    }//GEN-LAST:event_valueNohpFocusGained
 
     /**
      * @param args the command line arguments
@@ -2056,6 +3336,10 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
     private javax.swing.JButton btnsimpan;
     private javax.swing.JButton cancel;
     private javax.swing.JPanel checkPanel;
+    private javax.swing.JComboBox<String> cmbJumlahData;
+    private javax.swing.JComboBox<String> cmbTipekamar;
+    private datechooser.beans.DateChooserCombo dateChooserCombo1;
+    private datechooser.beans.DateChooserCombo dateChooserCombo2;
     private javax.swing.JPanel homePanel;
     private javax.swing.JTextField iemp;
     private javax.swing.JTextField ih20;
@@ -2063,10 +3347,7 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
     private javax.swing.JTextField ih50;
     private javax.swing.JTextField istd;
     private javax.swing.JTextField ivip;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton8;
@@ -2081,8 +3362,16 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -2091,16 +3380,22 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel labelAlamat;
+    private javax.swing.JLabel labelHome20Mbps;
+    private javax.swing.JLabel labelHome30Mbps;
+    private javax.swing.JLabel labelHome50Mbps;
+    private javax.swing.JLabel labelHomeKsng;
+    private javax.swing.JLabel labelHomeStd;
+    private javax.swing.JLabel labelHomeVip;
     private javax.swing.JLabel labelJk;
+    private javax.swing.JLabel labelLaki;
     private javax.swing.JLabel labelNama;
     private javax.swing.JLabel labelNama4;
     private javax.swing.JLabel labelNama5;
     private javax.swing.JLabel labelNohp;
+    private javax.swing.JLabel labelPerempuan;
     private javax.swing.JLabel labelSewa;
     private javax.swing.JLabel labelTipekamar;
     private javax.swing.JLabel labelTotal;
@@ -2123,6 +3418,8 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
     private javax.swing.JPanel panelInfo;
     private javax.swing.JPanel passwordPanel;
     private javax.swing.JPanel pricePanel;
+    private javax.swing.JPanel rBg;
+    private javax.swing.JLabel rData;
     private javax.swing.JRadioButton radiob20;
     private javax.swing.JRadioButton radiob30;
     private javax.swing.JRadioButton radiob50;
@@ -2131,6 +3428,7 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
     private javax.swing.JRadioButton radiobStandard;
     private javax.swing.JRadioButton radiobVip;
     private javax.swing.JRadioButton radiobperempuan;
+    private javax.swing.JTextField reportCek;
     private javax.swing.JPanel reportPanel;
     private javax.swing.JTable tabelmember;
     private javax.swing.JLabel title;
@@ -2147,28 +3445,5 @@ public class ViewMain extends javax.swing.JFrame implements MemberListiner {
     private javax.swing.JPanel valuePanel;
     private javax.swing.JTextField valueSewa;
     // End of variables declaration//GEN-END:variables
-
-    public void setResetField(String string) {
-        valueNama.setText(string);
-        valueAlamat.setText(string);
-        valueNohp.setText(string);
-        valueSewa.setText(string);
-        outputTotal.setText("0");
-    }
-
-    @Override
-    public void onChange(MemberModel model) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void onInsert(Member member) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void restetMember(Member member) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
 }

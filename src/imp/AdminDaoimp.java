@@ -30,7 +30,7 @@ public class AdminDaoimp implements AdminDao {
     }
     private final String all = "SELECT *FROM tbl_admin";
     private final String updateP = "UPDATE tbl_admin SET password=?, tgl_login = ? WHERE username=?";
-    private final String loginHistory= "UPDATE tbl_admin SET tgl_login = ? WHERE username=?";
+
     @Override
     public void updateAdmin(Admin admin) throws AdminException {
         PreparedStatement statement = null;
@@ -109,9 +109,6 @@ public class AdminDaoimp implements AdminDao {
         }
     }
 
-    @Override
-    public void loginHistory(Admin admin) throws AdminException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+
 
 }

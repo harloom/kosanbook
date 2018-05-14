@@ -20,6 +20,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import service.AdminDao;
@@ -36,6 +37,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        txtPasswod.requestFocus();
     }
 
     /**
@@ -260,10 +262,11 @@ public class Login extends javax.swing.JFrame {
     int i = 0;
     Hime hime = new Hime();
     boolean flagLogin = false;
-
+  
     public void login() throws SQLException, AdminException, InterruptedException, MemberException {
 
         AdminDao daolist = Database.getAdminDao();
+        
         List<Admin> aa = daolist.listAdmin();
         for (Admin n : aa) {
             lUsername = n.getUsername();
@@ -274,11 +277,12 @@ public class Login extends javax.swing.JFrame {
 
         String username = txtUname.getText();
         String pass = txtPasswod.getText();
-
+          final ImageIcon iconBetul = new ImageIcon(getClass().getResource("/assets/betul.jpg"));
         if ((lUsername == null ? username == null : lUsername.equals(username)) || lPassword.equals(pass)) {
             if (lUsername.equals(username) && lPassword.equals(pass)) {
                 flagLogin = true;
-                JOptionPane.showMessageDialog(null, "Login Berhasil");
+                JOptionPane.showMessageDialog(null, "Password Benar","Info",JOptionPane.INFORMATION_MESSAGE,iconBetul);
+                JOptionPane.showMessageDialog(null, "Tapi Boong!");
                 ViewMain view = new ViewMain();
                 view.setVisible(true);
                 dispose();
@@ -290,7 +294,7 @@ public class Login extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Kesempatan Tinggal 1 x lagi");
                 }
             }
-            System.err.println(i);
+//            System.err.println(i);
         }
 
         if (i == 5 || flagLogin == true) {
@@ -309,14 +313,14 @@ public class Login extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-
-            public void run() {
-                new Login().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//
+//            public void run() {
+//                new Login().setVisible(true);
+//            }
+//        });
+//    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnLogin;

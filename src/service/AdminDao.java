@@ -20,5 +20,5 @@ public interface AdminDao {
     
     public void updateAdmin(Admin admin) throws AdminException;
      public List<Admin> listAdmin() throws  AdminException;  
-     public void loginHistory (Admin admin) throws AdminException;
+
 }

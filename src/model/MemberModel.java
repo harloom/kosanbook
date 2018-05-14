@@ -8,7 +8,7 @@ package model;
 import database.Database;
 import enity.Member;
 import error.MemberException;
-import event.MemberListiner;
+
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -33,15 +33,7 @@ public class MemberModel {
     private Integer total;
     
     
-    private MemberListiner listiner;
 
-    public MemberListiner getListiner() {
-        return listiner;
-    }
-
-    public void setListiner(MemberListiner listiner) {
-        this.listiner = listiner;
-    }
 
     public String getTglexpire() {
         return tglexpire;
@@ -131,17 +123,7 @@ public class MemberModel {
     public void setTglmasuk(String tglmasuk) {
         this.tglmasuk = tglmasuk;
     }
-    private void    fireOnChange(){
-        if (listiner !=null){
-        listiner.onChange(this);
-        }
-        
-    }
-    private void fireOnInsert(Member member){
-         if (listiner !=null){
-        listiner.onInsert(member);
-        }
-    }
+
     
     
 

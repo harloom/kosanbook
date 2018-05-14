@@ -28,7 +28,7 @@ public class Hime {
             AudioInputStream file = AudioSystem.getAudioInputStream(Hime.class.getResource("link.wav"));
             clip.open(file);
             clip.start();
-            Thread.sleep(7000);
+            Thread.sleep(6000);
             clip.stop();
         } catch (Exception e) {
             e.printStackTrace();

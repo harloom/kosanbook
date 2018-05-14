@@ -9,11 +9,13 @@ import database.Database;
 import enity.Harga;
 import error.HargaException;
 import error.MemberException;
+import java.awt.Color;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -66,92 +68,97 @@ public class MemberController {
         String tipe_kamar = "";
         String wifi = "";
         String jk = "";
-        if (ls.length() < 1) {
-            sound.soundErr();
-            JOptionPane.showMessageDialog(inputmember, "Form Sewa Masih Kosong!");
-            return;
-        } else if (nohp.length() < 1) {
-            sound.soundErr();
-            JOptionPane.showMessageDialog(inputmember, "Form No Handphone Masih Kosong!");
-        }
-        Integer lamasewa = Integer.parseInt(ls);
-//        convert lama sew;
 
-        Integer totalkamar = null, totalinternet = null, totalkesuruhan;
-        if (lk.isSelected()) {
-            jk = "Pria";
-        } else if (pr.isSelected()) {
-            jk = "Wanita";
-        } else {
-            sound.soundErr();
-            JOptionPane.showMessageDialog(inputmember, "Silahkan Pilih Jenis Kelamin");
-            return;
-        }
-
-        if (vip.isSelected()) {
-            tipe_kamar = "VIP";
-            totalkamar = lamasewa * hrgvip;
-        } else if (stand.isSelected()) {
-            tipe_kamar = "Standar";
-            totalkamar = lamasewa * hrgstd;
-        } else if (kosong.isSelected()) {
-            tipe_kamar = "Kosong";
-            totalkamar = lamasewa * hrgempty;
-        } else {
-            sound.soundErr();
-            JOptionPane.showMessageDialog(inputmember, "Silahkan Pilih Tipe Kamar");
-            return;
-        }
-
-        if (v50.isSelected()) {
-            wifi = "50Mbps";
-            totalinternet = lamasewa * hrgv50;
-        } else if (v30.isSelected()) {
-            wifi = "30Mbps";
-            totalinternet = lamasewa * hrgv30;
-        } else if (v20.isSelected()) {
-            wifi = "20Mbps";
-            totalinternet = lamasewa * hrgv20;
-        } else {
-            wifi = "Tidak  Berlangganan";
-            totalinternet = lamasewa * 0;
-        }
-        // taggal 
-        Calendar now = Calendar.getInstance();
-        int year = now.get(Calendar.YEAR);
-        String cyear = Integer.toString(year);
-        int mont = (now.get(Calendar.MONTH) + 1);
-        String cmont = Integer.toString(mont);
-        int day = (now.get(Calendar.DATE));
-        String cday = Integer.toString(day);
-        String date = cyear + "/" + cmont + "/" + cday;
-
-        Calendar ex = Calendar.getInstance();
-        ex.add(Calendar.MONTH, lamasewa);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-        String exdate = sdf.format(ex.getTime());
-
-        //perjumlahan
-        totalkesuruhan = totalinternet + totalkamar;
-
-        //validation field kosong
+        ///// validtation
         if (nama.trim().equals("")) {
             sound.soundErr();
             JOptionPane.showMessageDialog(inputmember, "Silahkan Inputkan Nama ,Master");
-            return;
+            inputmember.getValueNama().setBorder(BorderFactory.createLineBorder(Color.red));
+        } else if (ls.length() < 1) {
+            sound.soundErr();
+            JOptionPane.showMessageDialog(inputmember, "Form Lama Sewa Masih Kosong!");
+            inputmember.getValueSewa().setBorder(BorderFactory.createLineBorder(Color.red));
+//            return;
         } else if (alamat.trim().equals("")) {
             sound.soundErr();
             JOptionPane.showMessageDialog(inputmember, "Alamat Belum Di Isi , Master");
-            return;
-        } else if (lamasewa < 1) {
+            inputmember.getValueAlamat().setBorder(BorderFactory.createLineBorder(Color.red));
+        } else if (nohp.length() < 1) {
             sound.soundErr();
-            JOptionPane.showMessageDialog(inputmember, "Lama Sewa Masih Kosong, Master");
-            return;
-        } else if (nohp.length() > 12) {
+            JOptionPane.showMessageDialog(inputmember, "Form No Handphone Masih Kosong!");
+            inputmember.getValueNohp().setBorder(BorderFactory.createLineBorder(Color.red));
+        } else if (nohp.length() <= 12) {
             sound.soundErr();
-            JOptionPane.showMessageDialog(inputmember, "No Handphone tidak boleh lebih dari 12 digit, Master");
-            return;
-        } else {
+            JOptionPane.showMessageDialog(inputmember, "No Handphone harus 12 digit, Master");
+            inputmember.getValueNohp().setBorder(BorderFactory.createLineBorder(Color.red));
+        } else if (!nohp.contains("8")) {
+            sound.soundErr();
+            JOptionPane.showMessageDialog(inputmember, "Format Salah,Masterr");
+            inputmember.getValueNohp().setBorder(BorderFactory.createLineBorder(Color.red));
+        }else {
+            Integer lamasewa = Integer.parseInt(ls);
+//        convert lama sew;
+
+            Integer totalkamar = null,
+                    totalinternet = null,
+                    totalkesuruhan = null;
+
+            if (lk.isSelected()) {
+                jk = "Pria";
+            } else if (pr.isSelected()) {
+                jk = "Wanita";
+            } else {
+                sound.soundErr();
+                JOptionPane.showMessageDialog(inputmember, "Silahkan Pilih Jenis Kelamin");
+                return;
+            }
+
+            if (vip.isSelected()) {
+                tipe_kamar = "VIP";
+                totalkamar = lamasewa * hrgvip;
+            } else if (stand.isSelected()) {
+                tipe_kamar = "Standar";
+                totalkamar = lamasewa * hrgstd;
+            } else if (kosong.isSelected()) {
+                tipe_kamar = "Kosong";
+                totalkamar = lamasewa * hrgempty;
+            } else {
+                sound.soundErr();
+                JOptionPane.showMessageDialog(inputmember, "Silahkan Pilih Tipe Kamar");
+                return;
+            }
+
+            if (v50.isSelected()) {
+                wifi = "50Mbps";
+                totalinternet = lamasewa * hrgv50;
+            } else if (v30.isSelected()) {
+                wifi = "30Mbps";
+                totalinternet = lamasewa * hrgv30;
+            } else if (v20.isSelected()) {
+                wifi = "20Mbps";
+                totalinternet = lamasewa * hrgv20;
+            } else {
+                wifi = "Tidak  Berlangganan";
+                totalinternet = lamasewa * 0;
+            }
+            // taggal 
+            Calendar now = Calendar.getInstance();
+            int year = now.get(Calendar.YEAR);
+            String cyear = Integer.toString(year);
+            int mont = (now.get(Calendar.MONTH) + 1);
+            String cmont = Integer.toString(mont);
+            int day = (now.get(Calendar.DATE));
+            String cday = Integer.toString(day);
+            String date = cyear + "/" + cmont + "/" + cday;
+
+            Calendar ex = Calendar.getInstance();
+            ex.add(Calendar.MONTH, lamasewa);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+            String exdate = sdf.format(ex.getTime());
+
+            //perjumlahan
+            totalkesuruhan = totalinternet + totalkamar;
+
             model.setNama(nama);
             model.setJeniskelamin(jk);
             model.setAd(alamat);
@@ -195,11 +202,12 @@ public class MemberController {
         JRadioButton v20 = inputmember.getRadiob20();
         String tipe_kamar = "";
         String wifi = "";
-        Integer totalkamar = null, totalinternet = null, totalkesuruhan;
+        Integer totalkamar = null, totalinternet = null, totalkesuruhan = null;
 
         String ls = inputmember.getValueSewa().getText();
         if (ls.length() < 1) {
             JOptionPane.showMessageDialog(inputmember, "Silahkan Inputkan Sewa ,Master");
+            inputmember.getValueSewa().setBorder(BorderFactory.createLineBorder(Color.red));
             return;
         }
 //        convert lama sew;
@@ -211,7 +219,9 @@ public class MemberController {
         } else if (kosong.isSelected()) {
             totalkamar = lamasewa * hrgempty;
         } else {
+            totalkamar = 0;
             JOptionPane.showMessageDialog(inputmember, "Silahkan Pilih Tipe Kamar");
+
         }
 
         if (v50.isSelected()) {
@@ -229,4 +239,45 @@ public class MemberController {
         inputmember.getOutputTotal().setText(Integer.toString(totalkesuruhan));
     }
 
+    public void resetForm(ViewMain view) {
+        view.getValueNama().setText("");
+        view.getValueNama().requestFocus();
+        view.getValueAlamat().setText("");
+        view.getValueNohp().setText("");
+        view.getValueSewa().setText("");
+        view.getOutputTotal().setText("");
+        view.getBg1().clearSelection();
+        view.getBg2().clearSelection();
+        view.getBg3().clearSelection();
+        //set border
+        view.getValueNama().setBorder(BorderFactory.createLineBorder(Color.white));
+        view.getValueAlamat().setBorder(BorderFactory.createLineBorder(Color.white));
+        view.getValueNohp().setBorder(BorderFactory.createLineBorder(Color.white));
+        view.getValueSewa().setBorder(BorderFactory.createLineBorder(Color.white));
+    }
+
+    public void setColorValidation(ViewMain view) {
+        if (view.getValueNama().getText().isEmpty() || view.getValueAlamat().getText().isEmpty()
+                || view.getValueSewa().getText().isEmpty() || view.getValueNohp().getText().isEmpty()
+                || !(view.getValueNohp().getText().contains("8"))) {
+
+            view.getValueNama().setBorder(BorderFactory.createLineBorder(Color.red));
+            view.getValueAlamat().setBorder(BorderFactory.createLineBorder(Color.red));
+            view.getValueNohp().setBorder(BorderFactory.createLineBorder(Color.red));
+            view.getValueSewa().setBorder(BorderFactory.createLineBorder(Color.red));
+
+            if (view.getValueNama().getText().length() > 0) {
+                view.getValueNama().setBorder(BorderFactory.createLineBorder(Color.green));
+            }
+            if (view.getValueAlamat().getText().length() > 0) {
+                view.getValueAlamat().setBorder(BorderFactory.createLineBorder(Color.green));
+            }
+            if (view.getValueSewa().getText().length()>0) {
+                view.getValueSewa().setBorder(BorderFactory.createLineBorder(Color.green));
+            }
+            if (view.getValueNohp().getText().length() == 12 && view.getValueNohp().getText().contains("8")) {
+                view.getValueNohp().setBorder(BorderFactory.createLineBorder(Color.green));
+            }
+        }
+    }
 }

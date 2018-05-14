@@ -16,6 +16,22 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`db_kosanbook` /*!40100 DEFAULT CHARACTE
 
 USE `db_kosanbook`;
 
+/*Table structure for table `tbl_admin` */
+
+DROP TABLE IF EXISTS `tbl_admin`;
+
+CREATE TABLE `tbl_admin` (
+  `username` varchar(20) NOT NULL,
+  `password` varchar(20) NOT NULL,
+  `tgl_login` date NOT NULL,
+  PRIMARY KEY (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `tbl_admin` */
+
+insert  into `tbl_admin`(`username`,`password`,`tgl_login`) values 
+('admin','123','2018-05-04');
+
 /*Table structure for table `tbl_harga` */
 
 DROP TABLE IF EXISTS `tbl_harga`;
@@ -35,7 +51,29 @@ CREATE TABLE `tbl_harga` (
 /*Data for the table `tbl_harga` */
 
 insert  into `tbl_harga`(`id`,`50mbps`,`30mbps`,`20mbps`,`vip`,`standard`,`kosong`,`tanggal_update`) values 
-(1,30000,15000,10000,699999,3499999,249999,'2018-03-24');
+(1,35000,20000,15000,755000,500000,150000,'2018-04-20');
+
+/*Table structure for table `tbl_hargaa` */
+
+DROP TABLE IF EXISTS `tbl_hargaa`;
+
+CREATE TABLE `tbl_hargaa` (
+  `kode_h` varchar(11) NOT NULL,
+  `harga` decimal(10,0) NOT NULL,
+  `jumlah_max` int(11) NOT NULL,
+  `tgl_update` date NOT NULL,
+  PRIMARY KEY (`kode_h`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `tbl_hargaa` */
+
+insert  into `tbl_hargaa`(`kode_h`,`harga`,`jumlah_max`,`tgl_update`) values 
+('20mbps',10,10,'2017-12-20'),
+('30mbps',10,10,'2017-12-20'),
+('50mbps',10,10,'2017-12-20'),
+('ko',10,10,'2017-12-20'),
+('std',10,10,'2017-12-20'),
+('vip',10,10,'2017-12-20');
 
 /*Table structure for table `tbl_member` */
 
@@ -55,19 +93,15 @@ CREATE TABLE `tbl_member` (
   `expire` date NOT NULL,
   PRIMARY KEY (`id_member`),
   UNIQUE KEY `nohp` (`nohp`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 /*Data for the table `tbl_member` */
 
 insert  into `tbl_member`(`id_member`,`nama`,`jenis_kelamin`,`alamat`,`sewa`,`nohp`,`tipe_kamar`,`tipe_wifi`,`total`,`tanggal_masuk`,`expire`) values 
-(2,'Ilham','Laki-Laki','Metro',12,'082307304530','VIP','100Mbps',8000000,'2018-03-22','2019-03-22'),
-(10,'Nanda Eranata','Pria','Jalan BandarLampugn',10,'0823073041','VIP','50Mbps',100000,'2018-02-25','2018-01-25'),
-(11,'Kirito','Pria','Tokyo',7,'082314221414','Standar','30Mbps',100000,'2018-03-25','2018-10-25'),
-(14,'Sinon','Pria','Sibuya',13,'082141512155','Standar','30Mbps',100000,'2018-03-25','2018-04-25'),
-(15,'YU','Wanita','Akibarahara',13,'0982121414','Standar','50Mbps',100000,'2018-03-25','2018-04-25'),
-(17,'Ilhamaja','Laki-Laki','Metro',12,'08230711530','VIP','100Mbps',8000000,'2018-03-25','2018-03-25'),
-(18,'Sora','Pria','Doooo',13,'0871231231','VIP','50Mbps',100000,'2018-03-25','2019-04-25'),
-(19,'Subaru','Pria','Isekai',11,'085414124114','VIP','50Mbps',8029989,'2018-03-25','2019-02-25');
+(1,'hafid','Pria','Jalan Pekalogam',24,'08123121231','VIP','50Mbps',18960000,'2018-05-04','2020-05-04'),
+(2,'ilham','Pria','Jalan Khaibrass',10,'082307120741','VIP','50Mbps',7900000,'2018-05-04','2019-03-04'),
+(3,'Rem','Wanita','Isekai',6,'087564563564','Standar','30Mbps',3120000,'2018-05-05','2018-11-05'),
+(4,'nanda','Pria','metro',9,'085655464646','Kosong','20Mbps',1485000,'2018-05-08','2019-02-08');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
